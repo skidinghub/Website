@@ -1,4 +1,2 @@
-<video width="320" height="240" controls loop="ture" muted =" " autoplay=" ">
-  <source src="https://github.com/skidinghub/Website/edit/main/Speculate-assets/background.mp4"
+<video src="https://user-images.githubusercontent.com/skidinghub/Website/edit/main/Speculate-assets/background.mp4" controls="controls" style="max-width: 730px;">
 </video>
-
