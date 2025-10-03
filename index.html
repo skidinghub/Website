@@ -861,7 +861,23 @@
           showCursor: false,
           loop : true
         });
-
+        // audio.js
+      <audio id="backgroundMusic" loop>
+      <source src="https://files.catbox.moe/xa7ycl.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('enter-overlay');
+        const button = document.getElementById('enter-button');
+        const profile = document.querySelector('.profile-container');
+        const audio = document.getElementById('backgroundMusic');
+        const enter = () => {
+          overlay.classList.add('hidden');
+          profile.classList.add('visible');
+          audio.play().catch(err => console.warn('Audio blocked:', err));
+        };
+        button.addEventListener('click', enter);
+      });
         // main.js
         let counter = 0,
             Title = '@dox :3',
@@ -1037,10 +1053,13 @@
                 };
             })();
         }
+
+        
     </script>
 </body>
 
 </html>
+
 
 
 
