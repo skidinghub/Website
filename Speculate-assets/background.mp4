@@ -1,2 +1,3 @@
-<video src="https://user-images.githubusercontent.com/skidinghub/Website/edit/main/Speculate-assets/background.mp4" controls="controls" style="max-width: 730px;">
+<video  controls >
+<source src="background.mp4" type="video/mp4">
 </video>
