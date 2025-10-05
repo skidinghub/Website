@@ -236,7 +236,7 @@
       color: var(--color-text);
     }
 
-    /* Social links with original colors restored */
+    /* Social links with centered logos */
     nav {
       margin-top: 2rem;
       display: flex;
@@ -288,6 +288,7 @@
       background: #1DB954;
     }
 
+    /* Center the logos perfectly within buttons */
     nav a img {
       width: 32px;
       height: 32px;
@@ -295,6 +296,8 @@
       pointer-events: none;
       user-select: none;
       transition: filter var(--transition-time) ease;
+      /* Ensure perfect centering */
+      margin: 0 auto;
     }
 
     nav a .tooltip {
