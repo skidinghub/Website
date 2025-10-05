@@ -768,7 +768,7 @@
             z-index: -1;
         }
 
-        body {
+                body {
             background-color: #121212;
             color: #b3b3b3;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -778,13 +778,34 @@
             min-height: 100vh;
             margin: 0;
             user-select: none;
+            position: relative;
         }
 
+        /* Styles for the social media icons */
+        #socials {
+            text-align: center;
+        }
+        
+        .wrapper {
+            list-style: none;
+            padding: 0;
+        }
+
+        .icon a {
+            text-decoration: none;
+        }
+
+        /* Styles for the music player */
         .music-player {
-            background: #000;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            
             border-radius: 12px;
             padding: 20px;
-            width: 400px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
@@ -1000,12 +1021,12 @@
             </li>
         </ul>
             <div>
-
-    <div class="music-player">
-        <audio id="myAudio" loop preload="auto">
-            <source src="https://files.catbox.moe/spmqbx.mp4" type="audio/mp4">
+<div class="music-player">
+        <audio id="Audio" loop preload="auto">
+            <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
+
         <div class="player-details">
             <div id="album-art"></div>
             <div class="track-info">
@@ -1013,6 +1034,7 @@
                 <span id="track-artist" class="track-artist">No artist</span>
             </div>
         </div>
+
         <div class="player-controls">
             <div id="progress-bar-container" class="progress-bar-container">
                 <span id="current-time" class="current-time">0:00</span>
@@ -1034,6 +1056,94 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playPauseBtn = document.getElementById('play-pause');
+        const currentTimeDisplay = document.getElementById('current-time');
+        const durationTimeDisplay = document.getElementById('total-time');
+        const progressBar = document.getElementById('progress');
+        const progressBarContainer = document.getElementById('progress-bar-container');
+
+        const playlist = [
+            {
+                title: 'how u seen me??',
+                artist: 'Ksuuvi',
+                src: 'how u seen me.mp3'
+            }
+        ];
+        let currentTrackIndex = 0;
+
+        const formatTime = (seconds) => {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        };
+        
+        const updatePlayPauseIcon = (isPaused) => {
+            if (isPaused) {
+                playPauseBtn.innerHTML = '<svg fill="#fff" viewBox="0 0 24 24"><path d="M7.05 3.125a1.5 1.5 0 0 0-1.5 0L1.767 5.864a1.5 1.5 0 0 0 0 2.272l4.133 2.739a1.5 1.5 0 0 0 1.5 0L11.183 8.136a1.5 1.5 0 0 0 0-2.272L7.05 3.125z"></path></svg>';
+            } else {
+                playPauseBtn.innerHTML = '<svg fill="#fff" viewBox="0 0 24 24"><path d="M14.05 3.125a1.5 1.5 0 0 1 1.5 0L19.233 5.864a1.5 1.5 0 0 1 0 2.272l-4.133 2.739a1.5 1.5 0 0 1-1.5 0L8.817 8.136a1.5 1.5 0 0 1 0-2.272L14.05 3.125z"></path><path d="M7.05 3.125a1.5 1.5 0 0 1 1.5 0L12.233 5.864a1.5 1.5 0 0 1 0 2.272l-4.133 2.739a1.5 1.5 0 0 1-1.5 0L2.817 8.136a1.5 1.5 0 0 1 0-2.272L7.05 3.125z"></path></svg>';
+            }
+        };
+
+        const loadTrack = (trackIndex) => {
+            if (playlist[trackIndex]) {
+                audio.src = playlist[trackIndex].src;
+                document.getElementById('track-title').innerText = playlist[trackIndex].title;
+                document.getElementById('track-artist').innerText = playlist[trackIndex].artist;
+                audio.load();
+                
+                audio.play()
+                    .then(() => updatePlayPauseIcon(false))
+                    .catch(error => {
+                        console.error('Autoplay was prevented:', error);
+                        updatePlayPauseIcon(true);
+                    });
+            }
+        };
+        
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                updatePlayPauseIcon(false);
+            } else {
+                audio.pause();
+                updatePlayPauseIcon(true);
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+        });
+
+        document.getElementById('previous').addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrackIndex);
+        });
+        
+        audio.addEventListener('loadedmetadata', () => {
+            durationTimeDisplay.textContent = formatTime(audio.duration);
+            document.getElementById('track-title').innerText = playlist[currentTrackIndex].title;
+            document.getElementById('track-artist').innerText = playlist[currentTrackIndex].artist;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+
+        progressBarContainer.addEventListener('click', (e) => {
+            const clickPosition = e.clientX - progressBarContainer.getBoundingClientRect().left;
+            const progressBarWidth = progressBarContainer.offsetWidth;
+            const seekPosition = (clickPosition / progressBarWidth) * audio.duration;
+            audio.currentTime = seekPosition;
+        });
+
+        loadTrack(currentTrackIndex);
                 
     <footer style="text-align: center; text-shadow: 0px 5px 5px ;font-family: 'Terror Pro', sans-serif; color: #221e41;margin-top: 32em;">
         <h3>
@@ -1048,25 +1158,12 @@
         </div>
     </center>
     <a href="index-2.html"></a>
-    <audio id="audio" loop="" preload="auto">
+    <audio id="1audio" loop="" preload="auto">
           <source src="Speculate-assets/NextGen.mp3" type="audio/mp4">
    </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         
@@ -1262,6 +1359,7 @@
 </body>
 
 </html>
+
 
 
 
