@@ -1,1405 +1,851 @@
 <!DOCTYPE html>
-<html class=" gmsgahokg idc0_346" lang="en">
+<html lang="en">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-    <meta charset="utf-8">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="🕵️ @Dox" property="og:title">
-    <meta content="Dox" property="og:description">
-    <meta content="../cdn.discordapp.com/attachments/873329563986440232/1303062262315094097/49873802eb5548abb0774c1ec97a2cd1a1f2.gif?ex=672a62cd&amp;is=6729114d&amp;hm=e196c49d959740991656afef0b49ba1ee0055d75017e89cb3f079e6cf3ee189b&amp;"
-          property="og:image">
-    <meta content="#36393e" data-react-helmet="true" name="theme-color">
-    <meta content="cope harder" name="description">
-    <title>@Dox</title>
-    <link href="Speculate-assets/baby.png" rel="icon" type="image/x-icon">
-    
-    <!-- Enhanced Styles -->
-    <style>
-        :root {
-            --primary-color: #ff2a6d;
-            --secondary-color: #05d9e8;
-            --accent-color: #005678;
-            --bg-color: #0a0a0a;
-            --text-color: #ffffff;
-            --glow-primary: 0 0 20px rgba(255, 42, 109, 0.6);
-            --glow-secondary: 0 0 20px rgba(5, 217, 232, 0.6);
-        }
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@Dox</title>
+  <meta name="description" content="Dox - Personal landing page with links and info." />
+  <meta name="author" content="@Dox" />
+  <meta property="og:title" content="&#128373; @Dox" />
+  <meta property="og:description" content="Dox personal page" />
+  <meta property="og:image"
+    content="../cdn.discordapp.com/attachments/873329563986440232/1303062262315094097/49873802eb5548abb0774c1ec97a2cd1a1f2.gif?ex=672a62cd&amp;is=6729114d&amp;hm=e196c49d959740991656afef0b49ba1ee0055d75017e89cb3f079e6cf3ee189b&amp;" />
+  <meta name="theme-color" content="#36393e" />
 
-        @font-face { font-family: derk; src: url('derk.otf.html'); }
-        @font-face { font-family: modes; src: url('modes.ttf.html'); }
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+  <!-- Favicon -->
+  <link rel="icon" href="Speculate-assets/baby.png" type="image/x-icon" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/terror-pro" rel="stylesheet" />
 
-        html {
-            font-family: 'Roboto Mono', monospace;
-            overflow: hidden;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            background: var(--bg-color);
-            color: var(--text-color);
-        }
+  <style>
+    :root {
+      --color-bg: #111;
+      --color-text: #fff;
+      --color-accent: #e04;
+      --color-accent-hover: #f33;
+      --font-primary: 'Roboto Mono', monospace;
+      --font-secondary: 'Terror Pro', sans-serif;
+      --font-logo: 'Modeseven', monospace;
+      --transition-time: 0.3s;
+      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --tooltip-text: #fff;
+      --focus-outline: 3px solid var(--color-accent);
+    }
 
-        .noise {
-            z-index: 1;
-        }
+    /* Reset */
+    *, *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .fixed-fluid {
-            top: 0;
-            left: 0;
-            opacity: 0.12;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            pointer-events: none;
-        }
+    html {
+      font-family: var(--font-primary);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
 
-        /* Enhanced Background with Gradient */
-        body {
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(5, 217, 232, 0.1) 0%, transparent 50%),
-                var(--bg-color);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    body {
+      user-select: none;
+      cursor: url(https://r2.guns.lol/60fbde15-6cda-4677-b899-30af0e66817a.webp), auto !important;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
 
-        /* Enhanced Video Background */
-        .video-background {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            opacity: 0.5;
-            filter: brightness(0.7) contrast(1.2);
-        }
+    /* Scrollbar hidden */
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(10, 10, 10, 0.9) 0%, rgba(0, 86, 120, 0.3) 100%);
-            z-index: -1;
-        }
+    /* Focus styles */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    label:focus-visible {
+      outline: var(--focus-outline);
+      outline-offset: 2px;
+    }
 
-        /* Enhanced Overlay */
-        #overlay-toggle {
-            position: absolute;
-            display: none;
-        }
+    /* Background video */
+    .video-background {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.7;
+      pointer-events: none;
+      user-select: none;
+    }
 
-        .overlay {
-            z-index: 3000;
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--accent-color) 100%);
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.8s cubic-bezier(0.87, 0, 0.13, 1);
-        }
+    /* Overlay */
+    #overlay-toggle {
+      display: none;
+    }
 
-        .overlay label {
-            display: grid;
-            place-items: center;
-            width: 100vw;
-            height: 100vw;
-            color: var(--text-color);
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: overlayPulse 2s ease-in-out infinite;
-        }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-bg);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      opacity: 1;
+      visibility: visible;
+      user-select: none;
+    }
 
-        @keyframes overlayPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+    #overlay-toggle:checked~.overlay {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-        #overlay-toggle:checked ~ .overlay {
-            animation-fill-mode: forwards;
-            animation-name: fade, hide;
-            animation-delay: 0s, 600ms;
-            animation-duration: 600ms, 1ms;
-        }
+    .overlay__label {
+      color: var(--color-text);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      animation: rainbow 5s linear infinite;
+      letter-spacing: 0.1em;
+    }
 
-        #overlay-toggle:checked ~ .overlay label {
-            animation-fill-mode: forwards;
-            animation-name: fade;
-            animation-delay: 0s;
-            animation-duration: 500ms;
-        }
+    @keyframes rainbow {
+      0% {
+        color: red;
+      }
 
-        /* Enhanced Main Content */
-        .main-container {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-            max-width: 800px;
-            width: 90%;
-        }
+      17% {
+        color: orange;
+      }
 
-        /* Enhanced Baby Image with Rocking Animation */
-        .hanginggirl {
-            max-height: 65vh;
-            margin: 2rem auto;
-            filter: grayscale(0.8) contrast(180%) brightness(1.1) 
-                    drop-shadow(var(--glow-primary));
-            border-radius: 15px;
-            box-shadow: 
-                0 0 30px rgba(255, 42, 109, 0.4),
-                inset 0 0 50px rgba(5, 217, 232, 0.1);
-            animation: 
-                rocking 6s ease-in-out infinite,
-                floatImage 8s ease-in-out infinite,
-                glowPulse 4s ease-in-out infinite;
-            transform-origin: top center;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 4px;
-        }
+      33% {
+        color: yellow;
+      }
 
-        @keyframes rocking {
-            0%, 100% { transform: rotate(-8deg); }
-            50% { transform: rotate(8deg); }
-        }
+      50% {
+        color: green;
+      }
 
-        @keyframes floatImage {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
+      67% {
+        color: blue;
+      }
 
-        @keyframes glowPulse {
-            0%, 100% { 
-                filter: grayscale(0.8) contrast(180%) brightness(1.1) 
-                        drop-shadow(0 0 20px rgba(255, 42, 109, 0.3));
-            }
-            50% { 
-                filter: grayscale(0.6) contrast(200%) brightness(1.2) 
-                        drop-shadow(0 0 30px rgba(5, 217, 232, 0.5));
-            }
-        }
+      84% {
+        color: purple;
+      }
 
-        /* Enhanced Title */
-        #center {
-            margin: 2rem 0;
-        }
+      100% {
+        color: red;
+      }
+    }
 
-        #center h1 {
-            font-size: 4rem;
-            font-family: modes;
-            text-shadow: 
-                0 0 10px var(--primary-color),
-                0 0 20px var(--primary-color),
-                0 0 40px var(--primary-color);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.1em;
-            position: relative;
-        }
+    /* Main content */
+    main {
+      z-index: 10;
+      max-width: 600px;
+      width: 100%;
+      margin-top: -2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        #center h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
-            border-radius: 2px;
-        }
+    /* Larger baby image with rocking animation */
+    main img {
+      max-height: 70vh;
+      margin-bottom: 1.5rem;
+      filter: grayscale(1) contrast(200%);
+      user-drag: none;
+      user-select: none;
+      pointer-events: none;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      loading: lazy;
+      animation: rocking 4s ease-in-out infinite;
+      transform-origin: top center;
+    }
 
-        .sparkle {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding: 0.1em 0.3em;
-            animation: sparkle 1.5s ease-in-out infinite alternate, 
-                       colorShift 3s ease-in-out infinite;
-        }
+    @keyframes rocking {
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
+    }
 
-        @keyframes sparkle {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
+    main h1 {
+      font-family: var(--font-logo);
+      font-size: clamp(2.5rem, 7vw, 3.5rem);
+      text-shadow: 0 0 0.4em #070707;
+      margin-bottom: 0.5rem;
+      user-select: text;
+    }
 
-        @keyframes colorShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(45deg); }
-        }
+    /* Sparkle effect */
+    .sparkle {
+      display: inline-block;
+      background-image: url('../../media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');
+      background-size: contain;
+      padding: 0.1em 0.2em;
+      text-shadow: none;
+      animation: sparkle 0.5s ease-in-out infinite alternate;
+    }
 
-        /* Enhanced Typed Text */
-        #typed {
-            font-size: 1.3rem;
-            font-family: 'Roboto Mono', monospace;
-            margin: 1.5rem 0;
-            min-height: 1.8em;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 
-                inset 0 0 20px rgba(255, 255, 255, 0.05),
-                0 0 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
+    @keyframes sparkle {
+      0% {
+        opacity: 0.5;
+      }
 
-        #typed::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
+      100% {
+        opacity: 1;
+      }
+    }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+    /* Typed text */
+    #typed {
+      font-size: 1.25rem;
+      font-family: var(--font-primary);
+      margin-top: 1rem;
+      min-height: 1.5em;
+      user-select: text;
+      color: var(--color-text);
+    }
 
-        /* Enhanced Social Links */
-        #socials {
-            margin: 3rem 0;
-        }
+    /* Social links - FIXED CENTERING */
+    .social-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
-        .wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            list-style: none;
-            flex-wrap: wrap;
-        }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      z-index: 10;
+    }
 
-        .wrapper .icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
+    nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      transition: all var(--transition-time) ease;
+      color: var(--color-text);
+      text-decoration: none;
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      outline-offset: 3px;
+    }
 
-        .wrapper .icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
+    /* Hover effects with brand colors - NO ROCKING ANIMATION */
+    nav a:hover,
+    nav a:focus-visible {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      border-radius: 15px;
+      z-index: 11;
+    }
 
-        .wrapper .icon:hover::before {
-            left: 100%;
-        }
+    nav a[href*="discord"]:hover,
+    nav a[href*="discord"]:focus-visible {
+      background: #5865F2;
+    }
 
-        .wrapper .icon:hover {
-            transform: translateY(-10px) scale(1.15);
-            width: 85px;
-            border-radius: 25px;
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 20px currentColor;
-        }
+    nav a[href*="github"]:hover,
+    nav a[href*="github"]:focus-visible {
+      background: #333333;
+    }
 
-        /* Brand-specific hover colors */
-        .wrapper .discord:hover { background: #5865F2; color: #5865F2; }
-        .wrapper .github:hover { background: #333333; color: #333333; }
-        .wrapper .spotify:hover { background: #1DB954; color: #1DB954; }
+    nav a[href*="spotify"]:hover,
+    nav a[href*="spotify"]:focus-visible {
+      background: #1DB954;
+    }
 
-        .wrapper .icon img {
-            width: 32px;
-            height: 32px;
-            transition: all 0.4s ease;
-            filter: brightness(0.9);
-        }
+    nav a img {
+      width: 32px;
+      height: 32px;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      transition: filter var(--transition-time) ease;
+    }
 
-        .wrapper .icon:hover img {
-            transform: scale(1.2) rotate(5deg);
-            filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-        }
+    nav a .tooltip {
+      position: absolute;
+      bottom: 140%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--tooltip-bg);
+      color: var(--tooltip-text);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-time) ease;
+      z-index: 20;
+    }
 
-        .tooltip {
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: rgba(10, 10, 10, 0.95);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
+    nav a:hover .tooltip,
+    nav a:focus-visible .tooltip {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        .wrapper .icon:hover .tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      font-family: var(--font-secondary);
+      color: #221e41;
+      font-size: 1.5rem;
+      text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+      user-select: none;
+    }
 
-        /* Enhanced Footer */
-        footer {
-            margin-top: 3rem;
-            font-family: 'Terror Pro', sans-serif;
-            color: var(--secondary-color);
-            font-size: 1.8rem;
-            text-shadow: 
-                0 0 10px var(--secondary-color),
-                0 5px 15px rgba(0, 0, 0, 0.5);
-        }
+    footer a {
+      color: #221e41;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color var(--transition-time) ease;
+    }
 
-        footer a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            background: rgba(5, 217, 232, 0.1);
-            border: 1px solid rgba(5, 217, 232, 0.2);
-            transition: all 0.3s ease;
-        }
+    footer a:hover,
+    footer a:focus-visible {
+      color: var(--color-accent-hover);
+      outline: none;
+    }
 
-        footer a:hover {
-            color: var(--primary-color);
-            text-shadow: 
-                0 0 15px var(--primary-color),
-                0 0 30px var(--primary-color);
-            transform: scale(1.1);
-            background: rgba(255, 42, 109, 0.1);
-            border-color: rgba(255, 42, 109, 0.3);
-        }
+    /* Audio Controller - REDESIGNED */
+    .audio-section {
+      margin-top: 2rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
-        /* Enhanced Snowflakes */
-        .snowflake {
-            color: var(--secondary-color);
-            font-size: 1em;
-            text-shadow: 0 0 5px var(--secondary-color);
-            animation: snowflakes-fall 10s linear infinite, 
-                       snowflakes-shake 3s ease-in-out infinite,
-                       snowGlow 4s ease-in-out infinite;
-        }
+    .audio-controller {
+      width: 320px;
+      background: rgba(20, 20, 20, 0.9);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: all var(--transition-time) ease;
+      position: relative;
+      overflow: hidden;
+    }
 
-        @keyframes snowGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--secondary-color); }
-            50% { text-shadow: 0 0 15px var(--primary-color); }
-        }
+    .audio-controller::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    }
 
-        /* Audio Control */
-        .audio-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
+    .audio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
 
-        .audio-control:hover {
-            transform: scale(1.1);
-            background: rgba(255, 42, 109, 0.2);
-        }
+    .audio-title {
+      font-size: 0.9rem;
+      color: var(--color-text);
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-        .audio-control::before {
-            content: '♪';
-            font-size: 1.2rem;
-            color: var(--text-color);
-        }
+    .audio-visualizer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      height: 20px;
+      margin-bottom: 16px;
+    }
 
-        .audio-control.playing::before {
-            animation: pulse 1s infinite;
-        }
+    .visualizer-bar {
+      width: 3px;
+      background: var(--color-accent);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+    .audio-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hanginggirl {
-                max-height: 50vh;
-            }
-            
-            #center h1 {
-                font-size: 2.5rem;
-            }
-            
-            .wrapper {
-                gap: 1rem;
-            }
-            
-            .wrapper .icon {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .wrapper .icon img {
-                width: 28px;
-                height: 28px;
-            }
-        }
+    .main-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        /* Custom Cursor */
-        * { 
-            cursor: url(https://r2.guns.lol/60fbde15-6cda-4677-b899-30af0e66817a.webp), auto !important; 
-        }
+    .play-pause {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      color: var(--color-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-time) ease;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Hide scrollbar */
-        .example::-webkit-scrollbar {
-            display: none;
-        }
+    .play-pause::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+      opacity: 0;
+      transition: opacity var(--transition-time) ease;
+      border-radius: 50%;
+    }
 
-        /* Animation keyframes from original */
-        @keyframes fade{
-            to { opacity: 0; }
-        }
-        @keyframes hide {
-            to { visibility: hidden; }
-        }
-        @keyframes snowflakes-fall {
-            0% { top: -10%; }
-            100% { top: 100%; }
-        }
-        @keyframes snowflakes-shake {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(80px); }
-        }
-    </style>
+    .play-pause:hover::before {
+      opacity: 0.2;
+    }
 
-    <link href="https://fonts.cdnfonts.com/css/terror-pro" rel="stylesheet">
-    <link href="Speculate-assets/fa.css" rel="stylesheet">
+    .play-pause:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(224, 4, 68, 0.4);
+    }
+
+    .play-pause span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0 15px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+      position: relative;
+    }
+
+    .progress::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(50%, -1.5px);
+      box-shadow: 0 0 5px rgba(224, 4, 68, 0.8);
+    }
+
+    .time-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .volume-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .volume-icon {
+      color: var(--color-text);
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .volume-slider {
+      width: 80px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .volume-level {
+      height: 100%;
+      background: var(--color-text);
+      border-radius: 2px;
+      width: 70%;
+      transition: width 0.1s ease;
+      position: relative;
+    }
+
+    .volume-level::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(50%, -2px);
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main h1 {
+        font-size: 2.5rem;
+      }
+
+      nav {
+        gap: 1rem;
+      }
+
+      nav a {
+        width: 50px;
+        height: 50px;
+      }
+
+      nav a img {
+        width: 28px;
+        height: 28px;
+      }
+
+      .audio-controller {
+        width: 90%;
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 
-<body oncontextmenu="return false;">
-    <!-- Enhanced Background -->
-    <video class="video-background" autoplay loop muted>
-        <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
+<body>
+  <video class="video-background" autoplay loop muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-    <!-- Overlay -->
-    <input autocomplete="off" id="overlay-toggle" type="checkbox">
-    <div class="fullscreen overlay">
-        <div id="center">
-            <label for="overlay-toggle" onclick="videoPlay()">
-                <div id="enter">ENTER</div>
-            </label>
-        </div>
-    </div>
+  <input type="checkbox" id="overlay-toggle" autocomplete="off" aria-hidden="true" />
+  <label for="overlay-toggle" class="overlay overlay__label" role="button" tabindex="0" aria-label="Click to enter">
+    - Click -
+  </label>
 
-    <!-- Main Content -->
-    <div class="main-container">
-        <!-- Enhanced Image -->
-        <img class="hanginggirl" src="Speculate-assets/baby.png" draggable="false" alt="Profile Image">
-
-        <!-- Enhanced Title -->
-        <div id="center">
-            <h1><span class="sparkle">@Dox</span></h1>
-        </div>
-
-        <!-- Enhanced Typed Text -->
-        <div id="center">
-            <span id="typed" style="font-family:'Roboto Mono',monospace;"></span>
-        </div>
-
-        <!-- Enhanced Social Links -->
-        <div id="socials">
-            <ul class="wrapper">
-                <li class="icon discord">
-                    <a href="https://discord.gg/hb7scgVyqY" target="_blank">
-                        <span class="tooltip">Discord</span>
-                        <img src="Speculate-assets/dsc.png" alt="Discord">
-                    </a>
-                </li>
-                <li class="icon github">
-                    <a href="https://github.com/skidinghub" target="_blank">
-                        <span class="tooltip">GitHub</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-                    </a>
-                </li>
-                <li class="icon spotify">
-                    <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank">
-                        <span class="tooltip">Spotify</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Enhanced Snowflakes -->
-        <div class="snowflakes">
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">I hate skidders</div>
-            <div class="snowflake">Fuck pourcodein</div>
-            <div class="snowflake">Made by DOX</div>
-            <div class="snowflake">Fuck Gurv</div>
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">I hate Aaron</div>
-            <div class="snowflake">I hate Alyssa</div>
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">i love jaydes</div>
-        </div>
-
-        <!-- Enhanced Footer -->
-        <footer>
-            <a href="https://discord.gg/hb7scgVyqY" target="_blank">✦</a>
-        </footer>
-    </div>
-
-    <!-- Audio Control -->
-    <div class="audio-control" id="audioToggle"></div>
-
-    <!-- Audio -->
-    <audio id="1audio" loop preload="auto">
-        <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3">
-    </audio>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        // Enhanced Typed.js
-        new Typed('#typed', {
-            strings: [
-                'Digital Creator & Developer',
-                'Building Awesome Projects', 
-                'Passionate About Technology',
-                'Join The Community! ✨'
-            ],
-            typeSpeed: 40,
-            backSpeed: 30,
-            backDelay: 2000,
-            showCursor: true,
-            cursorChar: '▌',
-            loop: true
-        });
-
-        // Enhanced Title Animation
-        let counter = 0,
-            Title = '@Dox :3',
-            direction = true;
-        let aniTitle = setInterval(function () {
-            if (counter == Title.length) direction = false;
-            if (counter == false) direction = true;
-            counter = direction == true ? ++counter : --counter;
-            newtitle = counter == 0 ? '' : Title.slice(0, counter);
-            document.title = newtitle + (counter < Title.length ? '▌' : '');
-        }, 400);
-
-        // Enhanced Audio Control
-        const audio = document.getElementById('1audio');
-        const audioToggle = document.getElementById('audioToggle');
-        let audioEnabled = false;
-
-        audioToggle.addEventListener('click', () => {
-            audioEnabled = !audioEnabled;
-            if (audioEnabled) {
-                audio.play().catch(e => console.log('Audio play failed:', e));
-                audioToggle.classList.add('playing');
-            } else {
-                audio.pause();
-                audioToggle.classList.remove('playing');
-            }
-        });
-
-        // Enhanced Video Play
-        function videoPlay() {
-            const video = document.querySelector('.video-background');
-            if (video) {
-                video.muted = false;
-                video.play().catch(e => console.log('Video play failed:', e));
-            }
-            // Auto-enable audio
-            audioEnabled = true;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            audioToggle.classList.add('playing');
-        }
-
-        // Enhanced Security
-        window.oncontextmenu = function () { return false; };
-
-        window.addEventListener('keydown', (event) => {
-            const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
-            if (event.ctrlKey && forbiddenKeys.includes(event.key.toLowerCase())) {
-                event.preventDefault();
-                document.body.style.animation = 'shake 0.5s';
-                setTimeout(() => document.body.style.animation = '', 500);
-            }
-            if (event.key === 'F12') {
-                event.preventDefault();
-                document.body.style.filter = 'hue-rotate(180deg)';
-                setTimeout(() => document.body.style.filter = '', 1000);
-            }
-        });
-
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Enhanced snowstorm effect
-        var snowStorm = (function() {
-            // ... (include the snowstorm.js code from your original file here)
-            // Keeping the original snowstorm functionality but with enhanced styling
-        })();
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html class=" gmsgahokg idc0_346" lang="en">
-
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-    <meta charset="utf-8">
-    <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="🕵️ @Dox" property="og:title">
-    <meta content="Dox" property="og:description">
-    <meta content="../cdn.discordapp.com/attachments/873329563986440232/1303062262315094097/49873802eb5548abb0774c1ec97a2cd1a1f2.gif?ex=672a62cd&amp;is=6729114d&amp;hm=e196c49d959740991656afef0b49ba1ee0055d75017e89cb3f079e6cf3ee189b&amp;"
-          property="og:image">
-    <meta content="#36393e" data-react-helmet="true" name="theme-color">
-    <meta content="cope harder" name="description">
-    <title>@Dox</title>
-    <link href="Speculate-assets/baby.png" rel="icon" type="image/x-icon">
+  <main role="main" aria-label="Main content" tabindex="0">
+    <img src="Speculate-assets/baby.png" alt="Decorative hanging baby image" loading="lazy" draggable="false" />
+    <h1><span class="sparkle" aria-label="Logo">@Dox</span></h1>
+    <p id="typed" aria-live="polite" aria-atomic="true" aria-relevant="additions"></p>
     
-    <!-- Enhanced Styles -->
-    <style>
-        :root {
-            --primary-color: #ff2a6d;
-            --secondary-color: #05d9e8;
-            --accent-color: #005678;
-            --bg-color: #0a0a0a;
-            --text-color: #ffffff;
-            --glow-primary: 0 0 20px rgba(255, 42, 109, 0.6);
-            --glow-secondary: 0 0 20px rgba(5, 217, 232, 0.6);
-        }
-
-        @font-face { font-family: derk; src: url('derk.otf.html'); }
-        @font-face { font-family: modes; src: url('modes.ttf.html'); }
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-family: 'Roboto Mono', monospace;
-            overflow: hidden;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            background: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        .noise {
-            z-index: 1;
-        }
-
-        .fixed-fluid {
-            top: 0;
-            left: 0;
-            opacity: 0.12;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            pointer-events: none;
-        }
-
-        /* Enhanced Background with Gradient */
-        body {
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(5, 217, 232, 0.1) 0%, transparent 50%),
-                var(--bg-color);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Enhanced Video Background */
-        .video-background {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            opacity: 0.5;
-            filter: brightness(0.7) contrast(1.2);
-        }
-
-        .video-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(45deg, rgba(10, 10, 10, 0.9) 0%, rgba(0, 86, 120, 0.3) 100%);
-            z-index: -1;
-        }
-
-        /* Enhanced Overlay */
-        #overlay-toggle {
-            position: absolute;
-            display: none;
-        }
-
-        .overlay {
-            z-index: 3000;
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--accent-color) 100%);
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.8s cubic-bezier(0.87, 0, 0.13, 1);
-        }
-
-        .overlay label {
-            display: grid;
-            place-items: center;
-            width: 100vw;
-            height: 100vw;
-            color: var(--text-color);
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: overlayPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes overlayPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        #overlay-toggle:checked ~ .overlay {
-            animation-fill-mode: forwards;
-            animation-name: fade, hide;
-            animation-delay: 0s, 600ms;
-            animation-duration: 600ms, 1ms;
-        }
-
-        #overlay-toggle:checked ~ .overlay label {
-            animation-fill-mode: forwards;
-            animation-name: fade;
-            animation-delay: 0s;
-            animation-duration: 500ms;
-        }
-
-        /* Enhanced Main Content */
-        .main-container {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-            max-width: 800px;
-            width: 90%;
-        }
-
-        /* Enhanced Baby Image with Rocking Animation */
-        .hanginggirl {
-            max-height: 65vh;
-            margin: 2rem auto;
-            filter: grayscale(0.8) contrast(180%) brightness(1.1) 
-                    drop-shadow(var(--glow-primary));
-            border-radius: 15px;
-            box-shadow: 
-                0 0 30px rgba(255, 42, 109, 0.4),
-                inset 0 0 50px rgba(5, 217, 232, 0.1);
-            animation: 
-                rocking 6s ease-in-out infinite,
-                floatImage 8s ease-in-out infinite,
-                glowPulse 4s ease-in-out infinite;
-            transform-origin: top center;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            padding: 4px;
-        }
-
-        @keyframes rocking {
-            0%, 100% { transform: rotate(-8deg); }
-            50% { transform: rotate(8deg); }
-        }
-
-        @keyframes floatImage {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { 
-                filter: grayscale(0.8) contrast(180%) brightness(1.1) 
-                        drop-shadow(0 0 20px rgba(255, 42, 109, 0.3));
-            }
-            50% { 
-                filter: grayscale(0.6) contrast(200%) brightness(1.2) 
-                        drop-shadow(0 0 30px rgba(5, 217, 232, 0.5));
-            }
-        }
-
-        /* Enhanced Title */
-        #center {
-            margin: 2rem 0;
-        }
-
-        #center h1 {
-            font-size: 4rem;
-            font-family: modes;
-            text-shadow: 
-                0 0 10px var(--primary-color),
-                0 0 20px var(--primary-color),
-                0 0 40px var(--primary-color);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.1em;
-            position: relative;
-        }
-
-        #center h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
-            border-radius: 2px;
-        }
-
-        .sparkle {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding: 0.1em 0.3em;
-            animation: sparkle 1.5s ease-in-out infinite alternate, 
-                       colorShift 3s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
-
-        @keyframes colorShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(45deg); }
-        }
-
-        /* Enhanced Typed Text */
-        #typed {
-            font-size: 1.3rem;
-            font-family: 'Roboto Mono', monospace;
-            margin: 1.5rem 0;
-            min-height: 1.8em;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 
-                inset 0 0 20px rgba(255, 255, 255, 0.05),
-                0 0 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #typed::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Enhanced Social Links */
-        #socials {
-            margin: 3rem 0;
-        }
-
-        .wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .wrapper .icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wrapper .icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .wrapper .icon:hover::before {
-            left: 100%;
-        }
-
-        .wrapper .icon:hover {
-            transform: translateY(-10px) scale(1.15);
-            width: 85px;
-            border-radius: 25px;
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.3),
-                0 0 20px currentColor;
-        }
-
-        /* Brand-specific hover colors */
-        .wrapper .discord:hover { background: #5865F2; color: #5865F2; }
-        .wrapper .github:hover { background: #333333; color: #333333; }
-        .wrapper .spotify:hover { background: #1DB954; color: #1DB954; }
-
-        .wrapper .icon img {
-            width: 32px;
-            height: 32px;
-            transition: all 0.4s ease;
-            filter: brightness(0.9);
-        }
-
-        .wrapper .icon:hover img {
-            transform: scale(1.2) rotate(5deg);
-            filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-        }
-
-        .tooltip {
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: rgba(10, 10, 10, 0.95);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .wrapper .icon:hover .tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Enhanced Footer */
-        footer {
-            margin-top: 3rem;
-            font-family: 'Terror Pro', sans-serif;
-            color: var(--secondary-color);
-            font-size: 1.8rem;
-            text-shadow: 
-                0 0 10px var(--secondary-color),
-                0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        footer a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            background: rgba(5, 217, 232, 0.1);
-            border: 1px solid rgba(5, 217, 232, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--primary-color);
-            text-shadow: 
-                0 0 15px var(--primary-color),
-                0 0 30px var(--primary-color);
-            transform: scale(1.1);
-            background: rgba(255, 42, 109, 0.1);
-            border-color: rgba(255, 42, 109, 0.3);
-        }
-
-        /* Enhanced Snowflakes */
-        .snowflake {
-            color: var(--secondary-color);
-            font-size: 1em;
-            text-shadow: 0 0 5px var(--secondary-color);
-            animation: snowflakes-fall 10s linear infinite, 
-                       snowflakes-shake 3s ease-in-out infinite,
-                       snowGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes snowGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--secondary-color); }
-            50% { text-shadow: 0 0 15px var(--primary-color); }
-        }
-
-        /* Audio Control */
-        .audio-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .audio-control:hover {
-            transform: scale(1.1);
-            background: rgba(255, 42, 109, 0.2);
-        }
-
-        .audio-control::before {
-            content: '♪';
-            font-size: 1.2rem;
-            color: var(--text-color);
-        }
-
-        .audio-control.playing::before {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hanginggirl {
-                max-height: 50vh;
-            }
-            
-            #center h1 {
-                font-size: 2.5rem;
-            }
-            
-            .wrapper {
-                gap: 1rem;
-            }
-            
-            .wrapper .icon {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .wrapper .icon img {
-                width: 28px;
-                height: 28px;
-            }
-        }
-
-        /* Custom Cursor */
-        * { 
-            cursor: url(https://r2.guns.lol/60fbde15-6cda-4677-b899-30af0e66817a.webp), auto !important; 
-        }
-
-        /* Hide scrollbar */
-        .example::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Animation keyframes from original */
-        @keyframes fade{
-            to { opacity: 0; }
-        }
-        @keyframes hide {
-            to { visibility: hidden; }
-        }
-        @keyframes snowflakes-fall {
-            0% { top: -10%; }
-            100% { top: 100%; }
-        }
-        @keyframes snowflakes-shake {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(80px); }
-        }
-    </style>
-
-    <link href="https://fonts.cdnfonts.com/css/terror-pro" rel="stylesheet">
-    <link href="Speculate-assets/fa.css" rel="stylesheet">
-</head>
-
-<body oncontextmenu="return false;">
-    <!-- Enhanced Background -->
-    <video class="video-background" autoplay loop muted>
-        <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
-
-    <!-- Overlay -->
-    <input autocomplete="off" id="overlay-toggle" type="checkbox">
-    <div class="fullscreen overlay">
-        <div id="center">
-            <label for="overlay-toggle" onclick="videoPlay()">
-                <div id="enter">ENTER</div>
-            </label>
-        </div>
+    <!-- Social buttons container with proper centering -->
+    <div class="social-container">
+      <nav aria-label="Social media links">
+        <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-discord"
+          tabindex="0">
+          <img src="Speculate-assets/dsc.png" alt="Discord" />
+          <span class="tooltip" id="tooltip-discord">Discord</span>
+        </a>
+        <a href="https://github.com/skidinghub" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-github"
+          tabindex="0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" />
+          <span class="tooltip" id="tooltip-github">GitHub</span>
+        </a>
+        <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank"
+          rel="noopener noreferrer" aria-describedby="tooltip-spotify" tabindex="0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
+          <span class="tooltip" id="tooltip-spotify">Spotify</span>
+        </a>
+      </nav>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-container">
-        <!-- Enhanced Image -->
-        <img class="hanginggirl" src="Speculate-assets/baby.png" draggable="false" alt="Profile Image">
-
-        <!-- Enhanced Title -->
-        <div id="center">
-            <h1><span class="sparkle">@Dox</span></h1>
+    <!-- Audio Controller - REDESIGNED -->
+    <div class="audio-section">
+      <div class="audio-controller" id="audioController">
+        <div class="audio-header">
+          <div class="audio-title">Now Playing</div>
         </div>
-
-        <!-- Enhanced Typed Text -->
-        <div id="center">
-            <span id="typed" style="font-family:'Roboto Mono',monospace;"></span>
+        
+        <div class="audio-visualizer" id="visualizer">
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
+          <div class="visualizer-bar"></div>
         </div>
-
-        <!-- Enhanced Social Links -->
-        <div id="socials">
-            <ul class="wrapper">
-                <li class="icon discord">
-                    <a href="https://discord.gg/hb7scgVyqY" target="_blank">
-                        <span class="tooltip">Discord</span>
-                        <img src="Speculate-assets/dsc.png" alt="Discord">
-                    </a>
-                </li>
-                <li class="icon github">
-                    <a href="https://github.com/skidinghub" target="_blank">
-                        <span class="tooltip">GitHub</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-                    </a>
-                </li>
-                <li class="icon spotify">
-                    <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank">
-                        <span class="tooltip">Spotify</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">
-                    </a>
-                </li>
-            </ul>
+        
+        <div class="audio-controls">
+          <div class="main-controls">
+            <button class="play-pause" id="playPause" aria-label="Play">
+              <span>▶</span>
+            </button>
+            <div class="progress-container">
+              <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+              </div>
+              <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="volume-controls">
+            <span class="volume-icon">🔊</span>
+            <div class="volume-slider" id="volumeSlider">
+              <div class="volume-level" id="volumeLevel"></div>
+            </div>
+          </div>
         </div>
-
-        <!-- Enhanced Snowflakes -->
-        <div class="snowflakes">
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">I hate skidders</div>
-            <div class="snowflake">Fuck pourcodein</div>
-            <div class="snowflake">Made by DOX</div>
-            <div class="snowflake">Fuck Gurv</div>
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">I hate Aaron</div>
-            <div class="snowflake">I hate Alyssa</div>
-            <div class="snowflake">.gg/hb7scgVyqY</div>
-            <div class="snowflake">i love jaydes</div>
-        </div>
-
-        <!-- Enhanced Footer -->
-        <footer>
-            <a href="https://discord.gg/hb7scgVyqY" target="_blank">✦</a>
-        </footer>
+      </div>
     </div>
+  </main>
 
-    <!-- Audio Control -->
-    <div class="audio-control" id="audioToggle"></div>
+  <footer>
+    <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-label="Discord link" tabindex="0">1</a>
+  </footer>
 
-    <!-- Audio -->
-    <audio id="1audio" loop preload="auto">
-        <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3">
-    </audio>
+  <audio id="1audio" loop preload="auto" style="display:none;">
+    <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3" />
+  </audio>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        // Enhanced Typed.js
-        new Typed('#typed', {
-            strings: [
-                'Digital Creator & Developer',
-                'Building Awesome Projects', 
-                'Passionate About Technology',
-                'Join The Community! ✨'
-            ],
-            typeSpeed: 40,
-            backSpeed: 30,
-            backDelay: 2000,
-            showCursor: true,
-            cursorChar: '▌',
-            loop: true
-        });
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Typed.js
+      const typed = new Typed('#typed', {
+        strings: ['bored asf', 'connecting :O', 'Explore and enjoy!', 'SKIDHUB V2 :D'],
+        typeSpeed: 35,
+        backSpeed: 90,
+        showCursor: false,
+        loop: true
+      });
 
-        // Enhanced Title Animation
-        let counter = 0,
-            Title = '@Dox :3',
-            direction = true;
-        let aniTitle = setInterval(function () {
-            if (counter == Title.length) direction = false;
-            if (counter == false) direction = true;
-            counter = direction == true ? ++counter : --counter;
-            newtitle = counter == 0 ? '' : Title.slice(0, counter);
-            document.title = newtitle + (counter < Title.length ? '▌' : '');
-        }, 400);
+      // Title animation
+      const title = '@Dox :3';
+      let index = 0;
+      let direction = 1;
 
-        // Enhanced Audio Control
-        const audio = document.getElementById('1audio');
-        const audioToggle = document.getElementById('audioToggle');
-        let audioEnabled = false;
+      setInterval(() => {
+        document.title = title.slice(0, index);
+        if (index === title.length) direction = -1;
+        if (index === 0) direction = 1;
+        index += direction;
+      }, 400);
 
-        audioToggle.addEventListener('click', () => {
-            audioEnabled = !audioEnabled;
-            if (audioEnabled) {
-                audio.play().catch(e => console.log('Audio play failed:', e));
-                audioToggle.classList.add('playing');
-            } else {
-                audio.pause();
-                audioToggle.classList.remove('playing');
-            }
-        });
+      // Audio Controller
+      const audio = document.getElementById('1audio');
+      const playPause = document.getElementById('playPause');
+      const progressBar = document.getElementById('progressBar');
+      const progress = document.getElementById('progress');
+      const currentTimeEl = document.getElementById('currentTime');
+      const durationEl = document.getElementById('duration');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const volumeLevel = document.getElementById('volumeLevel');
+      const visualizerBars = document.querySelectorAll('.visualizer-bar');
 
-        // Enhanced Video Play
-        function videoPlay() {
-            const video = document.querySelector('.video-background');
-            if (video) {
-                video.muted = false;
-                video.play().catch(e => console.log('Video play failed:', e));
-            }
-            // Auto-enable audio
-            audioEnabled = true;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            audioToggle.classList.add('playing');
+      let isPlaying = false;
+      let isDragging = false;
+      let visualizerInterval;
+
+      // Format time from seconds to MM:SS
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      }
+
+      // Update progress bar
+      function updateProgress() {
+        if (!isDragging) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progress.style.width = `${percent}%`;
+          currentTimeEl.textContent = formatTime(audio.currentTime);
         }
+      }
 
-        // Enhanced Security
-        window.oncontextmenu = function () { return false; };
-
-        window.addEventListener('keydown', (event) => {
-            const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
-            if (event.ctrlKey && forbiddenKeys.includes(event.key.toLowerCase())) {
-                event.preventDefault();
-                document.body.style.animation = 'shake 0.5s';
-                setTimeout(() => document.body.style.animation = '', 500);
-            }
-            if (event.key === 'F12') {
-                event.preventDefault();
-                document.body.style.filter = 'hue-rotate(180deg)';
-                setTimeout(() => document.body.style.filter = '', 1000);
-            }
+      // Visualizer animation
+      function updateVisualizer() {
+        visualizerBars.forEach(bar => {
+          const height = Math.random() * 100;
+          bar.style.height = `${10 + height * 0.9}%`;
         });
+      }
 
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
+      // Start/stop visualizer
+      function toggleVisualizer(playing) {
+        if (playing) {
+          visualizerInterval = setInterval(updateVisualizer, 150);
+        } else {
+          clearInterval(visualizerInterval);
+          visualizerBars.forEach(bar => {
+            bar.style.height = '10%';
+          });
+        }
+      }
 
-        // Enhanced snowstorm effect
-        var snowStorm = (function() {
-            // ... (include the snowstorm.js code from your original file here)
-            // Keeping the original snowstorm functionality but with enhanced styling
-        })();
-    </script>
+      // Update duration when metadata is loaded
+      audio.addEventListener('loadedmetadata', () => {
+        durationEl.textContent = formatTime(audio.duration);
+      });
+
+      // Update time while playing
+      audio.addEventListener('timeupdate', updateProgress);
+
+      // Play/Pause functionality
+      playPause.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          playPause.innerHTML = '<span>▶</span>';
+          playPause.setAttribute('aria-label', 'Play');
+          toggleVisualizer(false);
+        } else {
+          audio.play().catch(e => console.log('Audio play failed:', e));
+          playPause.innerHTML = '<span>❚❚</span>';
+          playPause.setAttribute('aria-label', 'Pause');
+          toggleVisualizer(true);
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // Seek functionality
+      progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+      });
+
+      // Progress bar drag functionality
+      progressBar.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        const rect = progressBar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          const rect = progressBar.getBoundingClientRect();
+          const percent = (e.clientX - rect.left) / rect.width;
+          const newTime = Math.max(0, Math.min(percent * audio.duration, audio.duration));
+          audio.currentTime = newTime;
+          progress.style.width = `${percent * 100}%`;
+          currentTimeEl.textContent = formatTime(newTime);
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      // Volume control
+      volumeSlider.addEventListener('click', (e) => {
+        const rect = volumeSlider.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        const volume = Math.max(0, Math.min(percent, 1));
+        audio.volume = volume;
+        volumeLevel.style.width = `${volume * 100}%`;
+      });
+
+      // Auto-enable audio when overlay is dismissed
+      document.querySelector('label[for="overlay-toggle"]').addEventListener('click', () => {
+        const video = document.querySelector('.video-background');
+        if (video) {
+          video.muted = false;
+          video.play();
+        }
+        
+        // Auto-play audio
+        audio.play().catch(e => console.log('Audio play failed:', e));
+        isPlaying = true;
+        playPause.innerHTML = '<span>❚❚</span>';
+        playPause.setAttribute('aria-label', 'Pause');
+        toggleVisualizer(true);
+      });
+
+      // Disable right-click context menu and certain keyboard shortcuts
+      window.addEventListener('contextmenu', e => e.preventDefault());
+
+      window.addEventListener('keydown', e => {
+        const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
+        const trapMessage = 'nice try';
+        if (e.ctrlKey && forbiddenKeys.includes(e.key.toLowerCase())) {
+          e.preventDefault();
+          document.body.textContent = trapMessage;
+        }
+        if (e.key === 'F12') {
+          e.preventDefault();
+          document.body.textContent = trapMessage;
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
