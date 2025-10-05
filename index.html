@@ -168,9 +168,9 @@
       margin-top: -2rem; /* Pull content up to center it better */
     }
 
-    /* Smaller baby image */
+    /* Larger baby image with rocking animation */
     main img {
-      max-height: 200px; /* Reduced from 400px */
+      max-height: 70vh; /* Much larger to touch top of screen */
       margin-bottom: 1.5rem;
       filter: grayscale(1) contrast(200%);
       user-drag: none;
@@ -184,6 +184,18 @@
       object-fit: contain;
       aspect-ratio: 1/1;
       loading: lazy;
+      /* Rocking animation */
+      animation: rocking 4s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    @keyframes rocking {
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
     }
 
     main h1 {
@@ -224,7 +236,7 @@
       color: var(--color-text);
     }
 
-    /* Social links with black hover */
+    /* Social links with original colors restored */
     nav {
       margin-top: 2rem;
       display: flex;
@@ -238,7 +250,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 60px; /* Slightly larger for better visibility */
+      width: 60px;
       height: 60px;
       border-radius: 12px;
       transition: all var(--transition-time) ease;
@@ -249,24 +261,35 @@
       outline-offset: 3px;
     }
 
-    /* Black hover effect */
+    /* Original color hover effects */
     nav a:hover,
     nav a:focus-visible {
       transform: scale(1.2);
-      background: #000000 !important; /* Force black background */
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       border-radius: 15px;
       z-index: 11;
     }
 
-    /* Make images white on black background when hovering */
-    nav a:hover img,
-    nav a:focus-visible img {
-      filter: invert(1) brightness(2) drop-shadow(0 0 1px #000);
+    /* Discord hover - blue */
+    nav a[href*="discord"]:hover,
+    nav a[href*="discord"]:focus-visible {
+      background: #5865F2;
+    }
+
+    /* GitHub hover - dark gray */
+    nav a[href*="github"]:hover,
+    nav a[href*="github"]:focus-visible {
+      background: #333333;
+    }
+
+    /* Spotify hover - green */
+    nav a[href*="spotify"]:hover,
+    nav a[href*="spotify"]:focus-visible {
+      background: #1DB954;
     }
 
     nav a img {
-      width: 32px; /* Slightly larger icons */
+      width: 32px;
       height: 32px;
       display: block;
       pointer-events: none;
