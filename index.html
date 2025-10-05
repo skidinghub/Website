@@ -18,22 +18,26 @@
   <link rel="icon" href="Speculate-assets/baby.png" type="image/x-icon" />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.cdnfonts.com/css/terror-pro" rel="stylesheet" />
 
   <style>
     :root {
-      --color-bg: #111;
-      --color-text: #fff;
-      --color-accent: #e04;
-      --color-accent-hover: #f33;
+      --color-bg: #0a0a0a;
+      --color-text: #ffffff;
+      --color-accent: #ff2a6d;
+      --color-accent-hover: #ff5c8d;
+      --color-secondary: #05d9e8;
+      --color-tertiary: #005678;
       --font-primary: 'Roboto Mono', monospace;
       --font-secondary: 'Terror Pro', sans-serif;
       --font-logo: 'Modeseven', monospace;
-      --transition-time: 0.3s;
-      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --transition-time: 0.4s;
+      --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --tooltip-bg: rgba(10, 10, 10, 0.95);
       --tooltip-text: #fff;
       --focus-outline: 3px solid var(--color-accent);
+      --glow-intensity: 0 0 20px;
     }
 
     /* Reset */
@@ -52,7 +56,7 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       scroll-behavior: smooth;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     body {
@@ -65,8 +69,66 @@
       justify-content: center;
       padding: 2rem;
       text-align: center;
-      background: var(--color-bg);
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(5, 217, 232, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 86, 120, 0.15) 0%, transparent 50%);
+      background-color: var(--color-bg);
       color: var(--color-text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    .bg-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+      opacity: 0.1;
+      animation: float 20s infinite linear;
+      z-index: -1;
+    }
+
+    .bg-particle:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 25s;
+    }
+
+    .bg-particle:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      top: 60%;
+      right: 10%;
+      animation-delay: 5s;
+      animation-duration: 20s;
+    }
+
+    .bg-particle:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      bottom: 10%;
+      left: 20%;
+      animation-delay: 10s;
+      animation-duration: 30s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(100px, 50px) rotate(90deg);
+      }
+      50% {
+        transform: translate(50px, 100px) rotate(180deg);
+      }
+      75% {
+        transform: translate(-50px, 50px) rotate(270deg);
+      }
     }
 
     /* Scrollbar hidden */
@@ -83,17 +145,26 @@
       outline-offset: 2px;
     }
 
-    /* Background video */
+    /* Background video with overlay */
     .video-background {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: -1;
-      opacity: 0.7;
+      z-index: -2;
+      opacity: 0.4;
       pointer-events: none;
       user-select: none;
+      filter: brightness(0.7) contrast(1.2);
+    }
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(45deg, rgba(10, 10, 10, 0.9) 0%, rgba(0, 86, 120, 0.3) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* Overlay */
@@ -104,13 +175,13 @@
     .overlay {
       position: fixed;
       inset: 0;
-      background-color: var(--color-bg);
+      background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-tertiary) 100%);
       z-index: 3000;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      transition: all 0.8s cubic-bezier(0.87, 0, 0.13, 1);
       opacity: 1;
       visibility: visible;
       user-select: none;
@@ -120,345 +191,630 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+      transform: scale(1.1);
+    }
+
+    .overlay__content {
+      text-align: center;
+      animation: overlayPulse 2s ease-in-out infinite;
     }
 
     .overlay__label {
       color: var(--color-text);
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 700;
-      animation: rainbow 5s linear infinite;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+      text-shadow: var(--glow-intensity) rgba(255, 42, 109, 0.5);
+    }
+
+    .overlay__subtitle {
+      color: var(--color-text);
+      font-size: 1.2rem;
+      opacity: 0.8;
+      font-weight: 300;
       letter-spacing: 0.1em;
     }
 
-    @keyframes rainbow {
-      0% {
-        color: red;
+    @keyframes overlayPulse {
+      0%, 100% {
+        transform: scale(1);
       }
-
-      17% {
-        color: orange;
-      }
-
-      33% {
-        color: yellow;
-      }
-
       50% {
-        color: green;
-      }
-
-      67% {
-        color: blue;
-      }
-
-      84% {
-        color: purple;
-      }
-
-      100% {
-        color: red;
+        transform: scale(1.05);
       }
     }
 
     /* Main content */
     main {
       z-index: 10;
-      max-width: 600px;
+      max-width: 800px;
       width: 100%;
-      margin-top: -2rem; /* Pull content up to center it better */
+      margin-top: -3rem;
+      position: relative;
     }
 
-    /* Larger baby image with rocking animation */
-    main img {
-      max-height: 70vh; /* Much larger to touch top of screen */
-      margin-bottom: 1.5rem;
-      filter: grayscale(1) contrast(200%);
+    /* Enhanced baby image with multiple animations */
+    .main-image {
+      max-height: 65vh;
+      margin-bottom: 2rem;
+      filter: grayscale(0.8) contrast(180%) brightness(1.1) drop-shadow(0 0 20px rgba(255, 42, 109, 0.3));
       user-drag: none;
       user-select: none;
       pointer-events: none;
       display: block;
       margin-left: auto;
       margin-right: auto;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      box-shadow: 
+        0 0 30px rgba(255, 42, 109, 0.4),
+        inset 0 0 50px rgba(5, 217, 232, 0.1);
       object-fit: contain;
       aspect-ratio: 1/1;
       loading: lazy;
-      /* Rocking animation */
-      animation: rocking 4s ease-in-out infinite;
+      /* Combined animations */
+      animation: 
+        rocking 6s ease-in-out infinite,
+        floatImage 8s ease-in-out infinite,
+        glowPulse 4s ease-in-out infinite;
       transform-origin: top center;
+      border: 2px solid transparent;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-secondary)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      padding: 4px;
     }
 
     @keyframes rocking {
       0%, 100% {
-        transform: rotate(-5deg);
+        transform: rotate(-8deg);
       }
       50% {
-        transform: rotate(5deg);
+        transform: rotate(8deg);
       }
     }
 
-    main h1 {
-      font-family: var(--font-logo);
-      font-size: clamp(2.5rem, 7vw, 3.5rem);
-      text-shadow: 0 0 0.4em #070707;
-      margin-bottom: 0.5rem;
-      user-select: text;
+    @keyframes floatImage {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
     }
 
-    /* Sparkle effect */
+    @keyframes glowPulse {
+      0%, 100% {
+        filter: grayscale(0.8) contrast(180%) brightness(1.1) drop-shadow(0 0 20px rgba(255, 42, 109, 0.3));
+      }
+      50% {
+        filter: grayscale(0.6) contrast(200%) brightness(1.2) drop-shadow(0 0 30px rgba(5, 217, 232, 0.5));
+      }
+    }
+
+    .main-title {
+      font-family: var(--font-logo);
+      font-size: clamp(3rem, 8vw, 5rem);
+      text-shadow: 
+        0 0 10px var(--color-accent),
+        0 0 20px var(--color-accent),
+        0 0 40px var(--color-accent);
+      margin-bottom: 1rem;
+      user-select: text;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.1em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-secondary), transparent);
+      border-radius: 2px;
+    }
+
+    /* Sparkle effect enhancement */
     .sparkle {
       display: inline-block;
-      background-image: url('../../media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');
-      background-size: contain;
-      padding: 0.1em 0.2em;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: 0.1em 0.3em;
       text-shadow: none;
-      animation: sparkle 0.5s ease-in-out infinite alternate;
+      animation: sparkle 1.5s ease-in-out infinite alternate, colorShift 3s ease-in-out infinite;
+      position: relative;
     }
 
     @keyframes sparkle {
       0% {
-        opacity: 0.5;
+        opacity: 0.7;
+        transform: scale(1);
       }
-
       100% {
         opacity: 1;
+        transform: scale(1.1);
       }
     }
 
-    /* Typed text */
-    #typed {
-      font-size: 1.25rem;
-      font-family: var(--font-primary);
-      margin-top: 1rem;
-      min-height: 1.5em;
-      user-select: text;
-      color: var(--color-text);
+    @keyframes colorShift {
+      0%, 100% {
+        filter: hue-rotate(0deg);
+      }
+      50% {
+        filter: hue-rotate(45deg);
+      }
     }
 
-    /* Social links with centered logos */
+    /* Enhanced typed text */
+    .typed-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+
+    #typed {
+      font-size: 1.5rem;
+      font-family: var(--font-primary);
+      min-height: 1.8em;
+      user-select: text;
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        inset 0 0 20px rgba(255, 255, 255, 0.05),
+        0 0 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #typed::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* Enhanced social links */
     nav {
-      margin-top: 2rem;
+      margin-top: 3rem;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2rem;
       flex-wrap: wrap;
       z-index: 10;
     }
 
-    nav a {
+    .social-link {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      transition: all var(--transition-time) ease;
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      transition: all var(--transition-time) var(--transition-bounce);
       color: var(--color-text);
       text-decoration: none;
       position: relative;
-      background: rgba(255, 255, 255, 0.1);
-      outline-offset: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
     }
 
-    /* Original color hover effects */
-    nav a:hover,
-    nav a:focus-visible {
-      transform: scale(1.2);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-      border-radius: 15px;
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .social-link:hover::before {
+      left: 100%;
+    }
+
+    /* Enhanced hover effects with glow */
+    .social-link:hover,
+    .social-link:focus-visible {
+      transform: translateY(-10px) scale(1.15);
+      box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        var(--glow-intensity) currentColor;
+      border-radius: 25px;
       z-index: 11;
     }
 
-    /* Discord hover - blue */
-    nav a[href*="discord"]:hover,
-    nav a[href*="discord"]:focus-visible {
+    /* Discord */
+    .social-link[href*="discord"]:hover,
+    .social-link[href*="discord"]:focus-visible {
       background: #5865F2;
+      color: #5865F2;
+      border-color: #5865F2;
     }
 
-    /* GitHub hover - dark gray */
-    nav a[href*="github"]:hover,
-    nav a[href*="github"]:focus-visible {
+    /* GitHub */
+    .social-link[href*="github"]:hover,
+    .social-link[href*="github"]:focus-visible {
       background: #333333;
+      color: #333333;
+      border-color: #333333;
     }
 
-    /* Spotify hover - green */
-    nav a[href*="spotify"]:hover,
-    nav a[href*="spotify"]:focus-visible {
+    /* Spotify */
+    .social-link[href*="spotify"]:hover,
+    .social-link[href*="spotify"]:focus-visible {
       background: #1DB954;
+      color: #1DB954;
+      border-color: #1DB954;
     }
 
-    /* Center the logos perfectly within buttons */
-    nav a img {
+    .social-link img {
       width: 32px;
       height: 32px;
       display: block;
       pointer-events: none;
       user-select: none;
-      transition: filter var(--transition-time) ease;
-      /* Ensure perfect centering */
-      margin: 0 auto;
+      transition: all var(--transition-time) ease;
+      filter: brightness(0.9);
     }
 
-    nav a .tooltip {
+    .social-link:hover img {
+      transform: scale(1.2) rotate(5deg);
+      filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+
+    .tooltip {
       position: absolute;
-      bottom: 140%;
+      bottom: 120%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(10px);
       background-color: var(--tooltip-bg);
       color: var(--tooltip-text);
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.8rem;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
-      transition: opacity var(--transition-time) ease;
+      transition: all var(--transition-time) var(--transition-bounce);
       z-index: 20;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
     }
 
-    nav a:hover .tooltip,
-    nav a:focus-visible .tooltip {
+    .social-link:hover .tooltip,
+    .social-link:focus-visible .tooltip {
       opacity: 1;
-      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
     }
 
-    /* Footer */
+    /* Enhanced footer */
     footer {
-      margin-top: 4rem;
+      margin-top: 5rem;
       font-family: var(--font-secondary);
-      color: #221e41;
-      font-size: 1.5rem;
-      text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+      color: var(--color-secondary);
+      font-size: 1.8rem;
+      text-shadow: 
+        0 0 10px var(--color-secondary),
+        0 5px 15px rgba(0, 0, 0, 0.5);
       user-select: none;
+      position: relative;
     }
 
     footer a {
-      color: #221e41;
-      font-size: 1.5rem;
+      color: var(--color-secondary);
+      font-size: 1.8rem;
       text-decoration: none;
-      transition: color var(--transition-time) ease;
+      transition: all var(--transition-time) ease;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      background: rgba(5, 217, 232, 0.1);
+      border: 1px solid rgba(5, 217, 232, 0.2);
     }
 
     footer a:hover,
     footer a:focus-visible {
-      color: var(--color-accent-hover);
-      outline: none;
+      color: var(--color-accent);
+      text-shadow: 
+        0 0 15px var(--color-accent),
+        0 0 30px var(--color-accent);
+      transform: scale(1.1);
+      background: rgba(255, 42, 109, 0.1);
+      border-color: rgba(255, 42, 109, 0.3);
+    }
+
+    /* Audio visualizer */
+    .audio-visualizer {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-time) ease;
+      z-index: 100;
+    }
+
+    .audio-visualizer:hover {
+      transform: scale(1.1);
+      background: rgba(255, 42, 109, 0.2);
+    }
+
+    .audio-visualizer::before {
+      content: '♪';
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .audio-visualizer.playing::before {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
-      main h1 {
-        font-size: 2.5rem;
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .main-image {
+        max-height: 50vh;
       }
 
       nav {
         gap: 1rem;
       }
 
-      nav a {
-        width: 50px;
-        height: 50px;
+      .social-link {
+        width: 60px;
+        height: 60px;
       }
 
-      nav a img {
+      .social-link img {
         width: 28px;
         height: 28px;
+      }
+
+      footer {
+        margin-top: 3rem;
+      }
+    }
+
+    /* Prefers reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Background elements -->
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+  <div class="bg-particle"></div>
+
   <video class="video-background" autoplay loop muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
     <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
+  <div class="video-overlay"></div>
 
   <input type="checkbox" id="overlay-toggle" autocomplete="off" aria-hidden="true" />
-  <label for="overlay-toggle" class="overlay overlay__label" role="button" tabindex="0" aria-label="Click to enter">
-    - Click -
-  </label>
+  <div class="overlay">
+    <div class="overlay__content">
+      <label for="overlay-toggle" class="overlay__label" role="button" tabindex="0" aria-label="Click to enter">
+        ENTER
+      </label>
+      <div class="overlay__subtitle">Click anywhere to begin</div>
+    </div>
+  </div>
 
   <main role="main" aria-label="Main content" tabindex="0">
-    <img src="Speculate-assets/baby.png" alt="Decorative hanging baby image" loading="lazy" draggable="false" />
-    <h1><span class="sparkle" aria-label="Logo">@Dox</span></h1>
-    <p id="typed" aria-live="polite" aria-atomic="true" aria-relevant="additions"></p>
+    <img src="Speculate-assets/baby.png" alt="Decorative hanging baby image" class="main-image" loading="lazy" draggable="false" />
+    <h1 class="main-title"><span class="sparkle" aria-label="Logo">@Dox</span></h1>
+    
+    <div class="typed-container">
+      <p id="typed" aria-live="polite" aria-atomic="true" aria-relevant="additions"></p>
+    </div>
     
     <nav aria-label="Social media links">
-      <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-discord"
-        tabindex="0">
+      <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" class="social-link" aria-describedby="tooltip-discord" tabindex="0">
         <img src="Speculate-assets/dsc.png" alt="Discord" />
-        <span class="tooltip" id="tooltip-discord">Discord</span>
+        <span class="tooltip" id="tooltip-discord">Join our Discord</span>
       </a>
-      <a href="https://github.com/skidinghub" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-github"
-        tabindex="0">
+      <a href="https://github.com/skidinghub" target="_blank" rel="noopener noreferrer" class="social-link" aria-describedby="tooltip-github" tabindex="0">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" />
-        <span class="tooltip" id="tooltip-github">GitHub</span>
+        <span class="tooltip" id="tooltip-github">View GitHub Profile</span>
       </a>
       <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank"
-        rel="noopener noreferrer" aria-describedby="tooltip-spotify" tabindex="0">
+        rel="noopener noreferrer" class="social-link" aria-describedby="tooltip-spotify" tabindex="0">
         <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
-        <span class="tooltip" id="tooltip-spotify">Spotify</span>
+        <span class="tooltip" id="tooltip-spotify">Check Spotify</span>
       </a>
     </nav>
   </main>
 
   <footer>
-    <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-label="Discord link" tabindex="0">1</a>
+    <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-label="Discord community" tabindex="0">✦</a>
   </footer>
 
-  <audio id="1audio" loop preload="auto" style="display:none;">
+  <div class="audio-visualizer" id="audio-toggle" role="button" aria-label="Toggle audio" tabindex="0"></div>
+
+  <audio id="background-audio" loop preload="auto" style="display:none;">
     <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3" />
   </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Initialize Typed.js
+      // Initialize Typed.js with enhanced options
       const typed = new Typed('#typed', {
-        strings: ['bored asf', 'connecting :O', 'Explore and enjoy!', 'SKIDHUB V2 :D'],
-        typeSpeed: 35,
-        backSpeed: 90,
-        showCursor: false,
-        loop: true
+        strings: [
+          'Digital Creator & Developer',
+          'Building Awesome Projects',
+          'Passionate About Technology',
+          'Join The Community! ✨'
+        ],
+        typeSpeed: 40,
+        backSpeed: 30,
+        backDelay: 2000,
+        showCursor: true,
+        cursorChar: '▌',
+        loop: true,
+        contentType: 'html'
       });
 
-      // Title animation
+      // Enhanced title animation
       const title = '@Dox :3';
       let index = 0;
       let direction = 1;
-
-      setInterval(() => {
-        document.title = title.slice(0, index);
+      let titleInterval = setInterval(() => {
+        document.title = title.slice(0, index) + (index < title.length ? '▌' : '');
         if (index === title.length) direction = -1;
         if (index === 0) direction = 1;
         index += direction;
-      }, 400);
+      }, 300);
 
-      // Disable right-click context menu and certain keyboard shortcuts
-      window.addEventListener('contextmenu', e => e.preventDefault());
+      // Audio control with visual feedback
+      const audio = document.getElementById('background-audio');
+      const audioToggle = document.getElementById('audio-toggle');
+      let audioEnabled = false;
 
-      window.addEventListener('keydown', e => {
-        const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
-        const trapMessage = 'nice try';
-        if (e.ctrlKey && forbiddenKeys.includes(e.key.toLowerCase())) {
-          e.preventDefault();
-          document.body.textContent = trapMessage;
-        }
-        if (e.key === 'F12') {
-          e.preventDefault();
-          document.body.textContent = trapMessage;
+      audioToggle.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        if (audioEnabled) {
+          audio.play().catch(e => console.log('Audio play failed:', e));
+          audioToggle.classList.add('playing');
+          audioToggle.setAttribute('aria-label', 'Mute audio');
+        } else {
+          audio.pause();
+          audioToggle.classList.remove('playing');
+          audioToggle.setAttribute('aria-label', 'Play audio');
         }
       });
 
       // Play video sound when overlay is dismissed
-      document.querySelector('label[for="overlay-toggle"]').addEventListener('click', () => {
-        const video = document.querySelector('.video-background');
-        if (video) {
-          video.muted = false;
-          video.play();
+      document.querySelector('.overlay').addEventListener('click', (e) => {
+        if (e.target.closest('label')) {
+          const video = document.querySelector('.video-background');
+          if (video) {
+            video.muted = false;
+            video.play().catch(e => console.log('Video play failed:', e));
+          }
+          // Enable audio by default
+          audioEnabled = true;
+          audio.play().catch(e => console.log('Audio play failed:', e));
+          audioToggle.classList.add('playing');
         }
+      });
+
+      // Enhanced security and interaction
+      window.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        // Show a subtle feedback instead of blocking completely
+        document.body.style.filter = 'brightness(1.1)';
+        setTimeout(() => {
+          document.body.style.filter = 'brightness(1)';
+        }, 200);
+      });
+
+      window.addEventListener('keydown', e => {
+        const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
+        if (e.ctrlKey && forbiddenKeys.includes(e.key.toLowerCase())) {
+          e.preventDefault();
+          // Create a visual effect instead of replacing content
+          document.body.style.animation = 'shake 0.5s';
+          setTimeout(() => {
+            document.body.style.animation = '';
+          }, 500);
+        }
+        if (e.key === 'F12') {
+          e.preventDefault();
+          document.body.style.filter = 'hue-rotate(180deg)';
+          setTimeout(() => {
+            document.body.style.filter = '';
+          }, 1000);
+        }
+      });
+
+      // Add CSS for shake animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Parallax effect for background particles
+      document.addEventListener('mousemove', (e) => {
+        const particles = document.querySelectorAll('.bg-particle');
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        particles.forEach((particle, index) => {
+          const speed = (index + 1) * 0.5;
+          const x = (mouseX - 0.5) * speed * 20;
+          const y = (mouseY - 0.5) * speed * 20;
+          particle.style.transform = `translate(${x}px, ${y}px)`;
+        });
       });
     });
   </script>
