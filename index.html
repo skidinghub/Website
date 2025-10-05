@@ -770,165 +770,7 @@
 
   <style>
         body {
-            background-color: #121212;
-            color: #b3b3b3;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            display: flex; /* Use Flexbox for layout */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: flex-end; /* Align content to the bottom */
-            align-items: center; /* Center horizontally */
-            min-height: 100vh;
-            margin: 0;
-            user-select: none;
-            position: relative;
-            padding-bottom: 20px; /* Add some padding at the bottom */
-        }
-
-        /* Styles for the social media icons */
-        #socials {
-            text-align: center;
-            margin-bottom: 20px; /* Add spacing between socials and player */
-        }
-        
-        .wrapper {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .icon a {
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Styles for the music player */
-        .music-player {
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 12px;
-            padding: 20px;
-            width: 400px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .player-details {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        #album-art {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            background-color: #333;
-        }
-
-        .track-info {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .track-title {
-            font-size: 1.1rem;
-            color: #fff;
-            font-weight: bold;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .track-artist {
-            font-size: 0.9rem;
-            color: #a7a7a7;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .player-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .progress-bar-container {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-
-        .current-time, .total-time {
-            font-size: 0.8rem;
-            color: #a7a7a7;
-            min-width: 35px;
-            text-align: center;
-        }
-
-        .progress-bar {
-            background-color: #404040;
-            height: 4px;
-            flex-grow: 1;
-            border-radius: 2px;
-            cursor: pointer;
-        }
-
-        .progress {
-            background-color: #fff;
-            height: 100%;
-            width: 0%; 
-            border-radius: 2px;
-            transition: width 0.2s ease;
-        }
-
-        .playback-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .control-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .control-btn svg {
-            fill: #fff;
-            transition: fill 0.2s ease;
-        }
-
-        .control-btn:hover svg {
-            fill: #1ed760;
-        }
-
-        .play-pause-btn svg {
-            width: 30px;
-            height: 30px;
-        }
-        
-        .skip-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-        
+          
         .social-icons:hover {
             transform: scale(1.3)
         }
@@ -1008,14 +850,14 @@
                <li class="icon Tiktok">
                 <span class="tooltip">GitHub</span>
                   <a href="https://github.com/skidinghub" target="_blank">
-                       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" style="width:32px; height:28px margin-left: 2.5in" class="glow" alt="a">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" style="width:32px; height:28px margin-left: 3.5in" class="glow" alt="a">
                 </a> 
                      </li> 
                      <ul class="wrapper">
                         <li class="icon Github">
                             <span class="tooltip">Spotify</span>
                               <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" style="width:32px; height:27.5px margin-left: 3.5in" class="glow" alt="a">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" style="width:32px; height:27.5px margin-left: 5.5in" class="glow" alt="a">
                               </p>
                 </a>
                 </span>
@@ -1024,134 +866,11 @@
             </li>
         </ul>
             <div>
-<div class="music-player">
-        <audio id="myAudio" loop preload="auto">
-            <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-
-        <div class="player-details">
-            <div id="album-art"></div>
-            <div class="track-info">
-                <span id="track-title" class="track-title">how u seen me??</span>
-                <span id="track-artist" class="track-artist">Ksuuvi</span>
-            </div>
-        </div>
-
-        <div class="player-controls">
-            <div id="progress-bar-container" class="progress-bar-container">
-                <span id="current-time" class="current-time">0:00</span>
-                <div class="progress-bar">
-                    <div id="progress" class="progress"></div>
-                </div>
-                <span id="total-time" class="total-time">0:00</span>
-            </div>
-            <div class="playback-buttons">
-                <button id="previous" class="control-btn skip-btn">
-                    <svg fill="#fff" viewBox="0 0 24 24"><path d="M12.75 3a.75.75 0 0 0-.75.75v5.879L5.342 3.528A.75.75 0 0 0 4.093 4.5v15a.75.75 0 0 0 1.249.972l6.658-6.101v5.879a.75.75 0 0 0 1.5 0v-15a.75.75 0 0 0-.75-.75z"></path></svg>
-                </button>
-                <button id="play-pause" class="control-btn play-pause-btn">
-                    <svg fill="#fff" viewBox="0 0 24 24"><path d="M7.05 3.125a1.5 1.5 0 0 0-1.5 0L1.767 5.864a1.5 1.5 0 0 0 0 2.272l4.133 2.739a1.5 1.5 0 0 0 1.5 0L11.183 8.136a1.5 1.5 0 0 0 0-2.272L7.05 3.125z"></path></svg>
-                </button>
-                <button id="next" class="control-btn skip-btn">
-                    <svg fill="#fff" viewBox="0 0 24 24"><path d="M11.25 3a.75.75 0 0 1 .75.75v5.879l6.658-6.101a.75.75 0 0 1 1.249.972v15a.75.75 0 0 1-1.249.972L12 14.101v5.879a.75.75 0 0 1-1.5 0v-15a.75.75 0 0 1 .75-.75z"></path></svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const audio = document.getElementById('myAudio');
-        const playPauseBtn = document.getElementById('play-pause');
-        const currentTimeDisplay = document.getElementById('current-time');
-        const durationTimeDisplay = document.getElementById('total-time');
-        const progressBar = document.getElementById('progress');
-        const progressBarContainer = document.getElementById('progress-bar-container');
-
-        const playlist = [
-            {
-                title: 'how u seen me??',
-                artist: 'Ksuuvi',
-                src: 'how u seen me.mp3'
-            }
-        ];
-        let currentTrackIndex = 0;
-
-        const formatTime = (seconds) => {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        };
-        
-        const updatePlayPauseIcon = (isPaused) => {
-            if (isPaused) {
-                playPauseBtn.innerHTML = '<svg fill="#fff" viewBox="0 0 24 24"><path d="M7.05 3.125a1.5 1.5 0 0 0-1.5 0L1.767 5.864a1.5 1.5 0 0 0 0 2.272l4.133 2.739a1.5 1.5 0 0 0 1.5 0L11.183 8.136a1.5 1.5 0 0 0 0-2.272L7.05 3.125z"></path></svg>';
-            } else {
-                playPauseBtn.innerHTML = '<svg fill="#fff" viewBox="0 0 24 24"><path d="M14.05 3.125a1.5 1.5 0 0 1 1.5 0L19.233 5.864a1.5 1.5 0 0 1 0 2.272l-4.133 2.739a1.5 1.5 0 0 1-1.5 0L8.817 8.136a1.5 1.5 0 0 1 0-2.272L14.05 3.125z"></path><path d="M7.05 3.125a1.5 1.5 0 0 1 1.5 0L12.233 5.864a1.5 1.5 0 0 1 0 2.272l-4.133 2.739a1.5 1.5 0 0 1-1.5 0L2.817 8.136a1.5 1.5 0 0 1 0-2.272L7.05 3.125z"></path></svg>';
-            }
-        };
-
-        const loadTrack = (trackIndex) => {
-            if (playlist[trackIndex]) {
-                audio.src = playlist[trackIndex].src;
-                document.getElementById('track-title').innerText = playlist[trackIndex].title;
-                document.getElementById('track-artist').innerText = playlist[trackIndex].artist;
-                audio.load();
-                
-                audio.play()
-                    .then(() => updatePlayPauseIcon(false))
-                    .catch(error => {
-                        console.error('Autoplay was prevented:', error);
-                        updatePlayPauseIcon(true);
-                    });
-            }
-        };
-        
-        playPauseBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                updatePlayPauseIcon(false);
-            } else {
-                audio.pause();
-                updatePlayPauseIcon(true);
-            }
-        });
-
-        document.getElementById('next').addEventListener('click', () => {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            loadTrack(currentTrackIndex);
-        });
-
-        document.getElementById('previous').addEventListener('click', () => {
-            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            loadTrack(currentTrackIndex);
-        });
-        
-        audio.addEventListener('loadedmetadata', () => {
-            durationTimeDisplay.textContent = formatTime(audio.duration);
-            document.getElementById('track-title').innerText = playlist[currentTrackIndex].title;
-            document.getElementById('track-artist').innerText = playlist[currentTrackIndex].artist;
-        });
-
-        audio.addEventListener('timeupdate', () => {
-            currentTimeDisplay.textContent = formatTime(audio.currentTime);
-            const progress = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-        });
-
-        progressBarContainer.addEventListener('click', (e) => {
-            const clickPosition = e.clientX - progressBarContainer.getBoundingClientRect().left;
-            const progressBarWidth = progressBarContainer.offsetWidth;
-            const seekPosition = (clickPosition / progressBarWidth) * audio.duration;
-            audio.currentTime = seekPosition;
-        });
-
-        loadTrack(currentTrackIndex);
                 
     <footer style="text-align: center; text-shadow: 0px 5px 5px ;font-family: 'Terror Pro', sans-serif; color: #221e41;margin-top: 32em;">
         <h3>
             <a href="https://discord.gg/hb7scgVyqY"
-               style="text-align: center; text-shadow: 0px 5px 5px ;font-family: 'Terror Pro', sans-serif;color: #221E41FF;font-size: 25px;">hi</a>
+               style="text-align: center; text-shadow: 0px 5px 5px ;font-family: 'Terror Pro', sans-serif;color: #221E41FF;font-size: 25px;"></a>
         </h3>
     </footer>
 
@@ -1162,7 +881,7 @@
     </center>
     <a href="index-2.html"></a>
     <audio id="1audio" loop="" preload="auto">
-          <source src="Speculate-assets/NextGen.mp3" type="audio/mp4">
+          <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3">
    </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -1362,6 +1081,7 @@
 </body>
 
 </html>
+
 
 
 
