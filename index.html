@@ -3,28 +3,61 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>@Dox</title>
-  <meta name="description" content="Dox - Personal landing page" />
+  <meta name="description" content="Dox - Personal landing page with links and info." />
+  <meta name="author" content="@Dox" />
+  <meta property="og:title" content="&#128373; @Dox" />
+  <meta property="og:description" content="Dox personal page" />
+  <meta property="og:image"
+    content="../cdn.discordapp.com/attachments/873329563986440232/1303062262315094097/49873802eb5548abb0774c1ec97a2cd1a1f2.gif?ex=672a62cd&amp;is=6729114d&amp;hm=e196c49d959740991656afef0b49ba1ee0055d75017e89cb3f079e6cf3ee189b&amp;" />
+  <meta name="theme-color" content="#36393e" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="Speculate-assets/baby.png" type="image/x-icon" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.cdnfonts.com/css/terror-pro" rel="stylesheet" />
 
   <style>
     :root {
-      --bg-color: #111;
-      --text-color: #fff;
-      --accent-color: #e04;
+      --color-bg: #111;
+      --color-text: #fff;
+      --color-accent: #e04;
+      --color-accent-hover: #f33;
       --font-primary: 'Roboto Mono', monospace;
+      --font-secondary: 'Terror Pro', sans-serif;
+      --font-logo: 'Modeseven', monospace;
+      --transition-time: 0.3s;
+      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --tooltip-text: #fff;
+      --focus-outline: 3px solid var(--color-accent);
     }
 
-    * {
+    /* Reset */
+    *, *::before,
+    *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+    }
+
+    html {
+      font-family: var(--font-primary);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+      line-height: 1.5;
     }
 
     body {
-      font-family: var(--font-primary);
-      background: var(--bg-color);
-      color: var(--text-color);
+      user-select: none;
+      cursor: url(https://r2.guns.lol/60fbde15-6cda-4677-b899-30af0e66817a.webp), auto !important;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -32,485 +65,376 @@
       justify-content: center;
       padding: 2rem;
       text-align: center;
-      overflow-x: hidden;
+      background: var(--color-bg);
+      color: var(--color-text);
     }
 
-    /* Video Background */
+    /* Scrollbar hidden */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Focus styles */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    label:focus-visible {
+      outline: var(--focus-outline);
+      outline-offset: 2px;
+    }
+
+    /* Background video */
     .video-background {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.6;
+      opacity: 0.7;
+      pointer-events: none;
+      user-select: none;
     }
 
-    /* Main Content Container */
-    .main-content {
-      max-width: 600px;
-      width: 100%;
-      z-index: 10;
+    /* Overlay */
+    #overlay-toggle {
+      display: none;
     }
 
-    /* Profile Image */
-    .profile-image {
-      max-width: 300px;
-      width: 100%;
-      margin: 0 auto 2rem;
-      filter: grayscale(1) contrast(150%);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-
-    /* Title Section */
-    .title-section {
-      margin-bottom: 2rem;
-    }
-
-    .main-title {
-      font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-
-    .subtitle {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      min-height: 2rem;
-    }
-
-    /* Social Links */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .social-link {
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-bg);
+      z-index: 3000;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      position: relative;
+      cursor: pointer;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      opacity: 1;
+      visibility: visible;
+      user-select: none;
     }
 
-    .social-link:hover {
-      transform: translateY(-5px) scale(1.1);
-      background: var(--accent-color);
-      box-shadow: 0 10px 25px rgba(224, 0, 68, 0.4);
-    }
-
-    .social-link img {
-      width: 30px;
-      height: 30px;
-      filter: brightness(0) invert(1);
-    }
-
-    .social-tooltip {
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.875rem;
-      white-space: nowrap;
+    #overlay-toggle:checked~.overlay {
       opacity: 0;
-      transition: opacity 0.3s ease;
+      visibility: hidden;
       pointer-events: none;
     }
 
-    .social-link:hover .social-tooltip {
-      opacity: 1;
+    .overlay__label {
+      color: var(--color-text);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      animation: rainbow 5s linear infinite;
+      letter-spacing: 0.1em;
     }
 
-    /* Footer */
-    .footer {
-      margin-top: 2rem;
-      opacity: 0.7;
-      font-size: 1.1rem;
+    @keyframes rainbow {
+      0% {
+        color: red;
+      }
+
+      17% {
+        color: orange;
+      }
+
+      33% {
+        color: yellow;
+      }
+
+      50% {
+        color: green;
+      }
+
+      67% {
+        color: blue;
+      }
+
+      84% {
+        color: purple;
+      }
+
+      100% {
+        color: red;
+      }
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .main-title {
-        font-size: 2.5rem;
-      }
-      
-      .social-links {
-        gap: 1rem;
-      }
-      
-      .social-link {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .social-link img {
-        width: 25px;
-        height: 25px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <video class="video-background" autoplay loop muted playsinline>
-    <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4">
-  </video>
-
-  <div class="main-content">
-    <div class="profile-image">
-      <img src="Speculate-assets/baby.png" alt="Profile" />
-    </div>
-
-    <div class="title-section">
-      <h1 class="main-title">@Dox</h1>
-      <div class="subtitle" id="typed-text"></div>
-    </div>
-
-    <div class="social-links">
-      <a href="https://discord.gg/hb7scgVyqY" class="social-link" target="_blank">
-        <img src="Speculate-assets/dsc.png" alt="Discord" />
-        <span class="social-tooltip">Discord</span>
-      </a>
-      <a href="https://github.com/skidinghub" class="social-link" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" />
-        <span class="social-tooltip">GitHub</span>
-      </a>
-      <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" class="social-link" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
-        <span class="social-tooltip">Spotify</span>
-      </a>
-    </div>
-
-    <div class="footer">
-      <a href="https://discord.gg/hb7scgVyqY" style="color: inherit; text-decoration: none;">1</a>
-    </div>
-  </div>
-
-  <script>
-    // Simple typing effect
-    const texts = ['bored asf', 'connecting :O', 'Fuck Pedos', 'SKIDHUB V2 :D'];
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 100;
-    const deletingSpeed = 50;
-    const pauseTime = 2000;
-
-    function typeEffect() {
-      const currentText = texts[textIndex];
-      const typedElement = document.getElementById('typed-text');
-      
-      if (isDeleting) {
-        typedElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-      }
-
-      if (!isDeleting && charIndex === currentText.length) {
-        setTimeout(() => isDeleting = true, pauseTime);
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-      }
-
-      setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+    /* Main content */
+    main {
+      z-index: 10;
+      max-width: 600px;
+      width: 100%;
+      margin-top: -2rem; /* Pull content up to center it better */
     }
 
-    // Start typing effect
-    document.addEventListener('DOMContentLoaded', typeEffect);
-
-    // Title animation
-    const title = '@Dox :3';
-    let titleIndex = 0;
-    let titleDirection = 1;
-
-    setInterval(() => {
-      document.title = title.slice(0, titleIndex);
-      if (titleIndex === title.length) titleDirection = -1;
-      if (titleIndex === 0) titleDirection = 1;
-      titleIndex += titleDirection;
-    }, 400);
-  </script>
-</body>
-
-</html><!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>@Dox</title>
-  <meta name="description" content="Dox - Personal landing page" />
-
-  <style>
-    :root {
-      --bg-color: #111;
-      --text-color: #fff;
-      --accent-color: #e04;
-      --font-primary: 'Roboto Mono', monospace;
+    /* Smaller baby image */
+    main img {
+      max-height: 200px; /* Reduced from 400px */
+      margin-bottom: 1.5rem;
+      filter: grayscale(1) contrast(200%);
+      user-drag: none;
+      user-select: none;
+      pointer-events: none;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      loading: lazy;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    main h1 {
+      font-family: var(--font-logo);
+      font-size: clamp(2.5rem, 7vw, 3.5rem);
+      text-shadow: 0 0 0.4em #070707;
+      margin-bottom: 0.5rem;
+      user-select: text;
     }
 
-    body {
+    /* Sparkle effect */
+    .sparkle {
+      display: inline-block;
+      background-image: url('../../media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');
+      background-size: contain;
+      padding: 0.1em 0.2em;
+      text-shadow: none;
+      animation: sparkle 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 0.5;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Typed text */
+    #typed {
+      font-size: 1.25rem;
       font-family: var(--font-primary);
-      background: var(--bg-color);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
-      overflow-x: hidden;
+      margin-top: 1rem;
+      min-height: 1.5em;
+      user-select: text;
+      color: var(--color-text);
     }
 
-    /* Video Background */
-    .video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0.6;
-    }
-
-    /* Main Content Container */
-    .main-content {
-      max-width: 600px;
-      width: 100%;
-      z-index: 10;
-    }
-
-    /* Profile Image */
-    .profile-image {
-      max-width: 300px;
-      width: 100%;
-      margin: 0 auto 2rem;
-      filter: grayscale(1) contrast(150%);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-
-    /* Title Section */
-    .title-section {
-      margin-bottom: 2rem;
-    }
-
-    .main-title {
-      font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-
-    .subtitle {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      min-height: 2rem;
-    }
-
-    /* Social Links */
-    .social-links {
+    /* Social links with black hover */
+    nav {
+      margin-top: 2rem;
       display: flex;
       justify-content: center;
       gap: 1.5rem;
-      margin: 3rem 0;
+      flex-wrap: wrap;
+      z-index: 10;
     }
 
-    .social-link {
+    nav a {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 60px;
+      width: 60px; /* Slightly larger for better visibility */
       height: 60px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      transition: all var(--transition-time) ease;
+      color: var(--color-text);
       text-decoration: none;
       position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      outline-offset: 3px;
     }
 
-    .social-link:hover {
-      transform: translateY(-5px) scale(1.1);
-      background: var(--accent-color);
-      box-shadow: 0 10px 25px rgba(224, 0, 68, 0.4);
+    /* Black hover effect */
+    nav a:hover,
+    nav a:focus-visible {
+      transform: scale(1.2);
+      background: #000000 !important; /* Force black background */
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      z-index: 11;
     }
 
-    .social-link img {
-      width: 30px;
-      height: 30px;
-      filter: brightness(0) invert(1);
+    /* Make images white on black background when hovering */
+    nav a:hover img,
+    nav a:focus-visible img {
+      filter: invert(1) brightness(2) drop-shadow(0 0 1px #000);
     }
 
-    .social-tooltip {
+    nav a img {
+      width: 32px; /* Slightly larger icons */
+      height: 32px;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+      transition: filter var(--transition-time) ease;
+    }
+
+    nav a .tooltip {
       position: absolute;
-      bottom: -40px;
+      bottom: 140%;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 6px 12px;
+      background-color: var(--tooltip-bg);
+      color: var(--tooltip-text);
+      padding: 8px 12px;
       border-radius: 6px;
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       white-space: nowrap;
       opacity: 0;
-      transition: opacity 0.3s ease;
       pointer-events: none;
+      transition: opacity var(--transition-time) ease;
+      z-index: 20;
     }
 
-    .social-link:hover .social-tooltip {
+    nav a:hover .tooltip,
+    nav a:focus-visible .tooltip {
       opacity: 1;
+      pointer-events: auto;
     }
 
     /* Footer */
-    .footer {
-      margin-top: 2rem;
-      opacity: 0.7;
-      font-size: 1.1rem;
+    footer {
+      margin-top: 4rem;
+      font-family: var(--font-secondary);
+      color: #221e41;
+      font-size: 1.5rem;
+      text-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+      user-select: none;
+    }
+
+    footer a {
+      color: #221e41;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color var(--transition-time) ease;
+    }
+
+    footer a:hover,
+    footer a:focus-visible {
+      color: var(--color-accent-hover);
+      outline: none;
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .main-title {
+    @media (max-width: 600px) {
+      main h1 {
         font-size: 2.5rem;
       }
-      
-      .social-links {
+
+      nav {
         gap: 1rem;
       }
-      
-      .social-link {
+
+      nav a {
         width: 50px;
         height: 50px;
       }
-      
-      .social-link img {
-        width: 25px;
-        height: 25px;
+
+      nav a img {
+        width: 28px;
+        height: 28px;
       }
     }
   </style>
 </head>
 
 <body>
-  <video class="video-background" autoplay loop muted playsinline>
-    <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4">
+  <video class="video-background" autoplay loop muted playsinline preload="auto" aria-hidden="true" tabindex="-1">
+    <source src="https://files.catbox.moe/vnfhyw.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
 
-  <div class="main-content">
-    <div class="profile-image">
-      <img src="Speculate-assets/baby.png" alt="Profile" />
-    </div>
+  <input type="checkbox" id="overlay-toggle" autocomplete="off" aria-hidden="true" />
+  <label for="overlay-toggle" class="overlay overlay__label" role="button" tabindex="0" aria-label="Click to enter">
+    - Click -
+  </label>
 
-    <div class="title-section">
-      <h1 class="main-title">@Dox</h1>
-      <div class="subtitle" id="typed-text"></div>
-    </div>
-
-    <div class="social-links">
-      <a href="https://discord.gg/hb7scgVyqY" class="social-link" target="_blank">
+  <main role="main" aria-label="Main content" tabindex="0">
+    <img src="Speculate-assets/baby.png" alt="Decorative hanging baby image" loading="lazy" draggable="false" />
+    <h1><span class="sparkle" aria-label="Logo">@Dox</span></h1>
+    <p id="typed" aria-live="polite" aria-atomic="true" aria-relevant="additions"></p>
+    
+    <nav aria-label="Social media links">
+      <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-discord"
+        tabindex="0">
         <img src="Speculate-assets/dsc.png" alt="Discord" />
-        <span class="social-tooltip">Discord</span>
+        <span class="tooltip" id="tooltip-discord">Discord</span>
       </a>
-      <a href="https://github.com/skidinghub" class="social-link" target="_blank">
+      <a href="https://github.com/skidinghub" target="_blank" rel="noopener noreferrer" aria-describedby="tooltip-github"
+        tabindex="0">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" />
-        <span class="social-tooltip">GitHub</span>
+        <span class="tooltip" id="tooltip-github">GitHub</span>
       </a>
-      <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" class="social-link" target="_blank">
+      <a href="https://open.spotify.com/user/31bfqeqqgqsafrj6m5qqvmfhd2x4?si=b16381000f534b12" target="_blank"
+        rel="noopener noreferrer" aria-describedby="tooltip-spotify" tabindex="0">
         <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
-        <span class="social-tooltip">Spotify</span>
+        <span class="tooltip" id="tooltip-spotify">Spotify</span>
       </a>
-    </div>
+    </nav>
+  </main>
 
-    <div class="footer">
-      <a href="https://discord.gg/hb7scgVyqY" style="color: inherit; text-decoration: none;">1</a>
-    </div>
-  </div>
+  <footer>
+    <a href="https://discord.gg/hb7scgVyqY" target="_blank" rel="noopener noreferrer" aria-label="Discord link" tabindex="0">1</a>
+  </footer>
 
+  <audio id="1audio" loop preload="auto" style="display:none;">
+    <source src="https://files.catbox.moe/73bpsa.mp3" type="audio/mp3" />
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
-    // Simple typing effect
-    const texts = ['bored asf', 'connecting :O', 'Fuck Pedos', 'SKIDHUB V2 :D'];
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 100;
-    const deletingSpeed = 50;
-    const pauseTime = 2000;
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Typed.js
+      const typed = new Typed('#typed', {
+        strings: ['bored asf', 'connecting :O', 'Explore and enjoy!', 'SKIDHUB V2 :D'],
+        typeSpeed: 35,
+        backSpeed: 90,
+        showCursor: false,
+        loop: true
+      });
 
-    function typeEffect() {
-      const currentText = texts[textIndex];
-      const typedElement = document.getElementById('typed-text');
-      
-      if (isDeleting) {
-        typedElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-      }
+      // Title animation
+      const title = '@Dox :3';
+      let index = 0;
+      let direction = 1;
 
-      if (!isDeleting && charIndex === currentText.length) {
-        setTimeout(() => isDeleting = true, pauseTime);
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-      }
+      setInterval(() => {
+        document.title = title.slice(0, index);
+        if (index === title.length) direction = -1;
+        if (index === 0) direction = 1;
+        index += direction;
+      }, 400);
 
-      setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-    }
+      // Disable right-click context menu and certain keyboard shortcuts
+      window.addEventListener('contextmenu', e => e.preventDefault());
 
-    // Start typing effect
-    document.addEventListener('DOMContentLoaded', typeEffect);
+      window.addEventListener('keydown', e => {
+        const forbiddenKeys = ['s', 'c', 'e', 'i', 'k', 'u'];
+        const trapMessage = 'nice try';
+        if (e.ctrlKey && forbiddenKeys.includes(e.key.toLowerCase())) {
+          e.preventDefault();
+          document.body.textContent = trapMessage;
+        }
+        if (e.key === 'F12') {
+          e.preventDefault();
+          document.body.textContent = trapMessage;
+        }
+      });
 
-    // Title animation
-    const title = '@Dox :3';
-    let titleIndex = 0;
-    let titleDirection = 1;
-
-    setInterval(() => {
-      document.title = title.slice(0, titleIndex);
-      if (titleIndex === title.length) titleDirection = -1;
-      if (titleIndex === 0) titleDirection = 1;
-      titleIndex += titleDirection;
-    }, 400);
+      // Play video sound when overlay is dismissed
+      document.querySelector('label[for="overlay-toggle"]').addEventListener('click', () => {
+        const video = document.querySelector('.video-background');
+        if (video) {
+          video.muted = false;
+          video.play();
+        }
+      });
+    });
   </script>
 </body>
 
