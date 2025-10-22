@@ -35,7 +35,7 @@ function toggleMusic() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const prefix = "⠐ ";
-    const titleText = "decal";
+    const titleText = "Dox";
     let index = 0;
     let isDeleting = false;
 
@@ -61,7 +61,7 @@ typeWriter();
 
 document.addEventListener("DOMContentLoaded", function () {
 const elements = document.querySelectorAll('.typewriter');
-const texts = ["email me: i@clu.ng", "i love kira", "#999"];
+const texts = ["long live skel", "i love jaydes", "Better than nr"];
 const typingSpeed = 100;
 const pauseDuration = 1000;
 let currentIndex = 0;
@@ -100,4 +100,5 @@ function typeWriter() {
 
 typeWriter();
 });
+
 });
