@@ -80,33 +80,44 @@
     <audio id="backgroundsong" style="display:none"></audio>
     <audio id="backgroundsong" controls></audio>
 <script>
-const playlist = [
-    
+const playlist = [   
   'https://qu.ax/nqWbN.mp3', //back to my day job skel
   'https://qu.ax/EEqOs.mp3', // fuck u i hate evryone witchbox n skel
   'https://qu.ax/bdqBn.mp3' // loser club skel aster
 ];
 
-const audio = document.getElementById('backgroundsong');
-let index = 0;
 
-function loadAndPlay(i) {
+const audio = document.getElementById('backgroundsong');
+let idx = 0;
+
+// load track
+function load(i){
   audio.src = playlist[i];
-  audio.play().catch(e => {
-    console.log('Play blocked:', e);
-  });
+  audio.load();
 }
 
+// advance when a track ends (loop playlist)
 audio.addEventListener('ended', () => {
-  index = (index + 1) % playlist.length;
-  loadAndPlay(index);
+  idx = (idx + 1) % playlist.length;
+  load(idx);
+  audio.play().catch(()=>{}); // ignore if blocked
 });
-
-// start playback with first track
+// start playback after a user gesture
+document.getElementById('start').addEventListener('click', async () => {
+  load(idx);
+  try {
+    await audio.play();
+    // hide the start button once playing
+    document.getElementById('start').style.display = 'none';
+  } catch (e) {
+    console.warn('Playback blocked:', e);
+  }
 loadAndPlay(index);
+});
 </script>
 </body>
 </html>
+
 
 
 
