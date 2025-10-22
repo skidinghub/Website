@@ -3,12 +3,21 @@
 
   const RANDOM_SITES = [
     'https://www.youtube.com/watch?v=LcCPzxAQplU',
-    'https://skidinghub.github.io/kys',
-    'https://skidinghub.github.io/long_live_skel',
-    'https://skidinghub.github.io/idk',
-    'https://skidinghub.github.io/IHATEMYSELF',
-    'https://skidinghub.github.io/HELLO',
-    'https://skidinghub.github.io/LOLLLL'   
+    'https://www.youtube.com/kys',
+    'https://www.youtube.com/long_live_skel',
+    'https://www.youtube.com/idk',
+    'https://www.youtube.com/IHATEMYSELF',
+    'https://www.youtube.com/HELLO',
+    'https://www.youtube.com/LOLLLL',
+    'https://www.youtube.com/BECOOL',
+    'https://www.youtube.com/BEHAPPY',
+    'https://www.youtube.com/HELP',
+    'https://www.youtube.com/#SKID',
+    'https://www.youtube.com/LOLOLOL',
+    'https://www.youtube.com/LEMA',
+    'https://www.youtube.com/Fkilovedher@proton.me',
+    'https://www.youtube.com/LOLLLL',
+    
   ];
 
   const INTERVAL_MS = 2000;
