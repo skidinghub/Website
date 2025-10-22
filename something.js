@@ -3,10 +3,12 @@
 
   const RANDOM_SITES = [
     'https://www.youtube.com/watch?v=LcCPzxAQplU',
-    'https://ddddddd.com/kys',
-    'https://mozilla.org/long_live_skel',
-    'https://github.com/idk',
-    'https://itch.io/IHATEMYSELF'
+    'https://skidinghub.github.io/kys',
+    'https://skidinghub.github.io/long_live_skel',
+    'https://skidinghub.github.io/idk',
+    'https://skidinghub.github.io/IHATEMYSELF',
+    'https://skidinghub.github.io/HELLO',
+    'https://skidinghub.github.io/LOLLLL'   
   ];
 
   const INTERVAL_MS = 2000;
@@ -39,10 +41,8 @@
   function setDisplayedUrl(rawUrl) {
     try {
       const parsed = new URL(rawUrl);
-      // show path/query/hash in address bar (same-origin only)
       const newPath = parsed.pathname + parsed.search + parsed.hash;
       history.replaceState(null, '', newPath);
-      // also update title and banner with full external URL for visible variety
       document.title = parsed.hostname + parsed.pathname + (parsed.search || '') + (parsed.hash || ' — ' + location.hostname);
       ensureBanner();
       bannerEl.textContent = parsed.href;
