@@ -77,9 +77,36 @@
             <p id="mutetext" onclick="toggleMusic()">on</p>
         </div>
     </div>
-    <audio id="backgroundsong" src="https://files.catbox.moe/73bpsa.mp3" loop></audio>
+    <audio id="backgroundsong" controls></audio>
+<script>
+const playlist = [
+    
+  'https://qu.ax/nqWbN.mp3', //back to my day job skel
+  'https://qu.ax/EEqOs.mp3', // fuck u i hate evryone witchbox n skel
+  'https://qu.ax/bdqBn.mp3' // loser club skel aster
+];
+
+const audio = document.getElementById('backgroundsong');
+let index = 0;
+
+function loadAndPlay(i) {
+  audio.src = playlist[i];
+  audio.play().catch(e => {
+    console.log('Play blocked:', e);
+  });
+}
+
+audio.addEventListener('ended', () => {
+  index = (index + 1) % playlist.length;
+  loadAndPlay(index);
+});
+
+// start playback with first track
+loadAndPlay(index);
+</script>
 </body>
 </html>
+
 
 
 
