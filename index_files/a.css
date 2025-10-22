@@ -10,6 +10,12 @@ body {
   background-size: cover;
 }
 
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
 #vanta {
   z-index: 0;
   position: absolute;
