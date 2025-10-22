@@ -11,4 +11,5 @@ body{margin:0;background:var(--bg);color:#0b1720}
 .cta{display:inline-block;margin-top:12px;padding:10px 14px;background:var(--accent);color:#fff;border-radius:6px;text-decoration:none}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .cards article{background:#fff;padding:18px;border-radius:8px;box-shadow:0 1px 6px rgba(10,20,30,.06)}
+.views-container { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: inherit; }
 .site-footer{padding:18px 0;text-align:center;color:#5a6b76}
