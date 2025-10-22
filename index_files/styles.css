@@ -191,7 +191,7 @@ a:hover {
  }
 
 html {
-  cursor: url("../images/cursor.png"), default;
+  cursor: url("../cursor.cur"), default;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
