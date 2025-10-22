@@ -16,8 +16,7 @@
     'https://www.youtube.com/LOLOLOL',
     'https://www.youtube.com/LEMA',
     'https://www.youtube.com/Fkilovedher@proton.me',
-    'https://www.youtube.com/LOLLLL',
-    
+    'https://www.youtube.com/LOLLLL'
   ];
 
   const INTERVAL_MS = 2000;
