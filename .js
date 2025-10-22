@@ -9,15 +9,42 @@
     'https://itch.io'
   ];
 
-  function goRandomOnLoad() {
+  const INTERVAL_MS = 2000; // 2 seconds
+  let index = 0;
+  let intervalId = null;
+
+  function setDisplayedUrl(rawUrl) {
+    try {
+      const parsed = new URL(rawUrl);
+      const newPath = parsed.pathname + parsed.search + parsed.hash;
+      history.replaceState(null, '', newPath);
+      console.debug('Displayed URL changed to', parsed.origin + newPath);
+    } catch (e) {
+      console.error('Invalid URL:', rawUrl);
+    }
+  }
+
+  function startLoop() {
     if (!RANDOM_SITES.length) return;
-    const url = RANDOM_SITES[Math.floor(Math.random() * RANDOM_SITES.length)];
-    // Replace location to avoid adding a history entry
-    window.location.replace(url);
+    setDisplayedUrl(RANDOM_SITES[index]);
+    intervalId = setInterval(() => {
+      index = (index + 1) % RANDOM_SITES.length;
+      setDisplayedUrl(RANDOM_SITES[index]);
+    }, INTERVAL_MS);
+  }
+
+  function stopLoop() {
+    if (intervalId !== null) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
   }
 
   if (document.readyState === 'complete') {
-    goRandomOnLoad();
+    startLoop();
   } else {
-    window.addEventListener('load', goRandomOnLoad, { once: true });
+    window.addEventListener('load', startLoop, { once: true });
   }
+  
+  window.__randomUrlLooper = { start: startLoop, stop: stopLoop };
+})();
