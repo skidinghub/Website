@@ -77,46 +77,49 @@
             <p id="mutetext" onclick="toggleMusic()">on</p>
         </div>
     </div>
-    <audio id="backgroundsong" style="display:none"></audio>
-    <audio id="backgroundsong" controls></audio>
+<div id="overlay">
+  <button class="overlaybtn" onclick="removeOverlay()">Dox</button>
+</div>
+<audio id="backgroundsong" preload="auto" style="display:none"></audio>
 <script>
-const playlist = [   
-  'https://qu.ax/nqWbN.mp3', //back to my day job skel
+const playlist = [
+  'https://qu.ax/nqWbN.mp3', // back to my day job skel
   'https://qu.ax/EEqOs.mp3', // fuck u i hate evryone witchbox n skel
-  'https://qu.ax/bdqBn.mp3' // loser club skel aster
+  'https://qu.ax/bdqBn.mp3'  // loser club skel aster
 ];
 
-
 const audio = document.getElementById('backgroundsong');
-let idx = 0;
+let index = 0;
 
-// load track
-function load(i){
+function loadTrack(i) {
   audio.src = playlist[i];
   audio.load();
 }
-
-// advance when a track ends (loop playlist)
 audio.addEventListener('ended', () => {
-  idx = (idx + 1) % playlist.length;
-  load(idx);
-  audio.play().catch(()=>{}); // ignore if blocked
+  index = (index + 1) % playlist.length;
+  loadTrack(index);
+  audio.play().catch(()=>{});
 });
-// start playback after a user gesture
-document.getElementById('start').addEventListener('click', async () => {
-  load(idx);
+// Called by your overlay button (user gesture)
+async function removeOverlay() {
+  // hide/remove overlay
+  const overlay = document.getElementById('overlay');
+  if (overlay) overlay.style.display = 'none';
+
+  // start playback (user gesture allows audible autoplay)
+  loadTrack(index);
   try {
     await audio.play();
-    // hide the start button once playing
-    document.getElementById('start').style.display = 'none';
   } catch (e) {
     console.warn('Playback blocked:', e);
   }
-loadAndPlay(index);
+}
+});
 });
 </script>
 </body>
 </html>
+
 
 
 
