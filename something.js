@@ -23,7 +23,7 @@
     };
 
     const setDisplayedUrl = (path) => {
-        const newUrl = path; // Change only the displayed path
+        const newUrl = path; // This is just for display
         ensureBanner();
         bannerEl.textContent = newUrl; // Update the banner
         console.log('Displayed path changed to', newUrl);
