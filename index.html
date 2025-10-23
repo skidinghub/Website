@@ -88,24 +88,19 @@ const playlist = [
 const audio = document.getElementById('backgroundsong');
 let index = 0;
 
-// Load a track into the audio element
 function loadTrack(i){
   audio.src = playlist[i];
   audio.load();
 }
 
-// When a track ends, advance to the next and play (loop playlist)
 audio.addEventListener('ended', () => {
   index = (index + 1) % playlist.length;
   loadTrack(index);
   audio.play().catch(()=>{});
 });
 
-// Called by your overlay button click — hides overlay and starts playback
-async function removeOverlay(){
-  const overlay = document.getElementById('overlay');
-  if (overlay) overlay.style.display = 'none';
-
+// Call this from a user gesture (e.g., an existing button's onclick)
+async function startPlayback(){
   loadTrack(index);
   try { await audio.play(); } catch (e) {}
 }
@@ -114,6 +109,7 @@ async function removeOverlay(){
 });
 </body>
 </html>
+
 
 
 
