@@ -77,12 +77,14 @@
             <p id="mutetext" onclick="toggleMusic()">on</p>
         </div>
     </div>
+        
 <audio id="backgroundsong" style="display:none"></audio>
+
 <script>
 const playlist = [
-  'https://qu.ax/nqWbN.mp3',            // back to my day job skel
-  'https://qu.ax/EEqOs.mp3',            // fuck u i hate evryone witchbox n skel
-  'https://qu.ax/bdqBn.mp3'             // loser club skel aster
+  'https://qu.ax/nqWbN.mp3',             // back to my day job skel (alternate)
+  'https://qu.ax/EEqOs.mp3',             // fuck u i hate evryone witchbox n skel
+  'https://qu.ax/bdqBn.mp3'              // loser club skel aster
 ];
 
 const audio = document.getElementById('backgroundsong');
@@ -91,7 +93,7 @@ let index = 0;
 function loadAndPlay() {
   audio.src = playlist[index];
   audio.play().catch(e => {
-    console.error('Playback blocked, try clicking to play:', e);
+    console.error('Playback blocked:', e);
   });
 }
 
@@ -100,20 +102,19 @@ audio.addEventListener('ended', () => {
   loadAndPlay();
 });
 
-// Attempt to start on window load
-window.addEventListener('load', loadAndPlay);
-
-// Optional: try user interaction to start playback
+// Start play on click anywhere on the page
 document.addEventListener('click', () => {
-  if (audio.paused) {
-    loadAndPlay();
-  }
+  loadAndPlay();
+});
+</script>
+
 });
 
 </script>
 });
 </body>
 </html>
+
 
 
 
