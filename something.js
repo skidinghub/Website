@@ -2,24 +2,24 @@
   'use strict';
 
   const RANDOM_SITES = [
-    'https://www.youtube.com/watch?v=LcCPzxAQplU',
-    'https://www.youtube.com/kys',
-    'https://www.youtube.com/long_live_skel',
-    'https://www.youtube.com/idk',
-    'https://www.youtube.com/IHATEMYSELF',
-    'https://www.youtube.com/HELLO',
-    'https://www.youtube.com/LOLLLL',
-    'https://www.youtube.com/BECOOL',
-    'https://www.youtube.com/BEHAPPY',
-    'https://www.youtube.com/HELP',
-    'https://www.youtube.com/#SKID',
-    'https://www.youtube.com/LOLOLOL',
-    'https://www.youtube.com/LEMA',
-    'https://www.youtube.com/Fkilovedher@proton.me',
-    'https://www.youtube.com/LOLLLL'
+    '/watch?v=LcCPzxAQplU',
+    '/kys',
+    '/long_live_skel',
+    '/idk',
+    '/IHATEMYSELF',
+    '/HELLO',
+    '/LOLLLL',
+    '/BECOOL',
+    '/BEHAPPY',
+    '/HELP',
+    '/#SKID',
+    '/LOLOLOL',
+    '/LEMA',
+    '/Fkilovedher@proton.me',
+    '/LOLLLL'
   ];
 
-  const INTERVAL_MS = 2000;
+  const INTERVAL_MS = 150;
   let index = 0;
   let intervalId = null;
   let bannerEl = null;
@@ -49,7 +49,7 @@
   function setDisplayedUrl(rawUrl) {
     try {
       const parsed = new URL(rawUrl);
-      const newPath = parsed.pathname + parsed.search + parsed.hash;
+      const newPath = parsed.pathname.replace(/\/$/, '') + parsed.search + parsed.hash; // Remove trailing slash
       history.replaceState(null, '', newPath);
       document.title = parsed.hostname + parsed.pathname + (parsed.search || '') + (parsed.hash || ' — ' + location.hostname);
       ensureBanner();
