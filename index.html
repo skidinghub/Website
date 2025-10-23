@@ -69,7 +69,7 @@
 
                 <div class="views-container">
                     <svg viewBox="0 0 24 24" width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0" style="margin-bottom: -3px;"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14C3 9.02944 7.02944 5 12 5C16.9706 5 21 9.02944 21 14M17 14C17 16.7614 14.7614 19 12 19C9.23858 19 7 16.7614 7 14C7 11.2386 9.23858 9 12 9C14.7614 9 17 11.2386 17 14Z" stroke="#c18be0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                    <span id="view-count">236</span>
+                    <span id="view-count">234</span>
                 </div>
             </div>
 
@@ -79,6 +79,7 @@
     </div>
         
 <audio id="backgroundsong" controls style="display:none"></audio>
+<audio id="backgroundsong" style="display:none"></audio>
 
 <script>
 const playlist = [
@@ -90,29 +91,21 @@ const playlist = [
 const audio = document.getElementById('backgroundsong');
 let index = 0;
 
-function loadAndPlay(i) {
-  audio.src = playlist[i];
-  audio.load();
-  audio.play().then(() => {
-    console.log('Playing:', playlist[i]);
-  }).catch(e => {
-    console.error('play() blocked:', e);
-  });
+function loadAndPlay() {
+  audio.src = playlist[index];
+  audio.play().catch(console.error); // Log any play errors
 }
 
 audio.addEventListener('ended', () => {
   index = (index + 1) % playlist.length;
-  loadAndPlay(index);
+  loadAndPlay();
 });
 
-// Attempt to start on window load
-window.addEventListener('load', () => {
-  loadAndPlay(index);
-});
 </script>
 });
 </body>
 </html>
+
 
 
 
