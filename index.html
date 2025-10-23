@@ -100,12 +100,6 @@ audio.addEventListener('ended', () => {
   loadTrack(index);
   audio.play().catch(()=>{});
 });
-// Called by your overlay button (user gesture)
-async function removeOverlay() {
-  // hide/remove overlay
-  const overlay = document.getElementById('overlay');
-  if (overlay) overlay.style.display = 'none';
-
   // start playback (user gesture allows audible autoplay)
   loadTrack(index);
   try {
@@ -119,6 +113,7 @@ async function removeOverlay() {
 </script>
 </body>
 </html>
+
 
 
 
