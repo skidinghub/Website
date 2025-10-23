@@ -82,7 +82,7 @@
 
 <script>
 const playlist = [
-  'https://qu.ax/nqWbN.mp3',             // back to my day job skel (alternate)
+  'https://qu.ax/nqWbN.mp3',             // back to my day job skel
   'https://qu.ax/EEqOs.mp3',             // fuck u i hate evryone witchbox n skel
   'https://qu.ax/bdqBn.mp3'              // loser club skel aster
 ];
@@ -103,12 +103,14 @@ audio.addEventListener('ended', () => {
 });
 
 // Start play on click anywhere on the page
-document.addEventListener('click', () => {
+document.addEventListener('click', function removeListener() {
   loadAndPlay();
+  document.removeEventListener('click', removeListener);
 });
 </script>
 </body>
 </html>
+
 
 
 
