@@ -77,10 +77,7 @@
             <p id="mutetext" onclick="toggleMusic()">on</p>
         </div>
     </div>
-        
-<audio id="backgroundsong" controls style="display:none"></audio>
 <audio id="backgroundsong" style="display:none"></audio>
-
 <script>
 const playlist = [
   'https://qu.ax/nqWbN.mp3',            // back to my day job skel
@@ -93,7 +90,9 @@ let index = 0;
 
 function loadAndPlay() {
   audio.src = playlist[index];
-  audio.play().catch(console.error); // Log any play errors
+  audio.play().catch(e => {
+    console.error('Playback blocked, try clicking to play:', e);
+  });
 }
 
 audio.addEventListener('ended', () => {
@@ -101,10 +100,21 @@ audio.addEventListener('ended', () => {
   loadAndPlay();
 });
 
+// Attempt to start on window load
+window.addEventListener('load', loadAndPlay);
+
+// Optional: try user interaction to start playback
+document.addEventListener('click', () => {
+  if (audio.paused) {
+    loadAndPlay();
+  }
+});
+
 </script>
 });
 </body>
 </html>
+
 
 
 
