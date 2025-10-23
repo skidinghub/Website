@@ -99,16 +99,11 @@ audio.addEventListener('ended', () => {
   audio.play().catch(()=>{});
 });
 
-// Call this from a user gesture (e.g., an existing button's onclick)
-async function startPlayback(){
-  loadTrack(index);
-  try { await audio.play(); } catch (e) {}
-}
 </script>
-
 });
 </body>
 </html>
+
 
 
 
