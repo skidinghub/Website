@@ -2,10 +2,10 @@
     'use strict';
 
     const RANDOM_PATHS = [
-        '/watch?v=LcCPzxAQplU', '/kys', '/long_live_skel', '/idk',
-        '/IHATEMYSELF', '/HELLO', '/LOLLLL', '/BECOOL',
-        '/BEHAPPY', '/HELP', '/#SKID', '/LOLOLOL',
-        '/LEMA', '/Fkilovedher@proton.me', '/LOLLLL'
+        'http://www.Meetbeater.com/watch?v=LcCPzxAQplU', 'http://www.Meetbeater.com/kys', 'http://www.Meetbeater.com/long_live_skel', 'http://www.Meetbeater.com/idk',
+        'http://www.Meetbeater.com/IHATEMYSELF', 'http://www.Meetbeater.com/HELLO', 'http://www.Meetbeater.com/LOLLLL', 'http://www.Meetbeater.com/BECOOL',
+        'http://www.Meetbeater.com/BEHAPPY', 'http://www.Meetbeater.com/HELP', 'http://www.Meetbeater.com/#SKID', 'http://www.Meetbeater.com/LOLOLOL',
+        'http://www.Meetbeater.com/LEMA', 'http://www.Meetbeater.com/Fkilovedher@proton.me', 'http://www.Meetbeater.com/LOLLLL'
     ];
 
     let index = 0, intervalId, bannerEl;
